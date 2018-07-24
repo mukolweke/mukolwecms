@@ -22,7 +22,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/admin_dash', 'PagesController@adminIndex');
+Route::get('/view_fa', 'PagesController@adminIndex');
+
+Route::get('/view_clients', 'PagesController@viewClients');
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('advisors', 'PagesController@adminIndex')->name('admin.adminIndex');

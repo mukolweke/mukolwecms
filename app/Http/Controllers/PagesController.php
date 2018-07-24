@@ -6,9 +6,15 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
-    // admin index
+    // admin view fa index
     public function adminIndex()
     {
         return view('admin.index');
+    }
+
+    // admin view clients index
+    public function viewClients()
+    {
+        return view('admin.viewClients');
     }
 }

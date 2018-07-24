@@ -1,52 +1,41 @@
 <template>
     <div>
-        <div class="form-group">
-            <router-link :to="{name: 'createAdvisor'}" class="button success">Create new FA</router-link>
-        </div>
 
-        <div class="card" style="width:700px;margin:0 auto;">
-            <div class="card-divider">Financial Advisors</div>
+        <div class="card" style="width:1000px;margin-top:30px;">
+            <div class="card-divider">Cytonn Client List</div>
             <div class="card-section">
+
                 <table class="table">
                     <thead>
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Phone</th>
-                        <th>Rank</th>
+                        <th width="200">Phone</th>
+                        <th>Date</th>
                         <th width="200">&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="advisor, index in advisors">
-                        <td>{{ advisor.name }}</td>
-                        <td>{{ advisor.email }}</td>
-                        <td>{{ advisor.phone }}</td>
-                        <template v-if="advisor.fa_rank === 0">
-                            <td>Intern FA</td>
-                        </template>
-                        <template v-else-if="advisor.fa_rank === 1">
-                            <td>Junior FA</td>
-                        </template>
-                        <template v-if="advisor.fa_rank === 2">
-                            <td>Senior FA</td>
-                        </template>
-                        <template v-if="advisor.fa_rank === 3">
-                            <td>Supervisor</td>
-                        </template>
+                    <tr v-for="client, index in clients">
+                        <td>{{ client.name }}</td>
+                        <td>{{ client.email }}</td>
+                        <td>{{ client.phone }}</td>
+                        <td>{{ client.created_at }}</td>
                         <td>
-                            <router-link :to="{name: 'editAdvisor', params: {id: advisor.id}}" class="button small primary ">
+                            <router-link :to="{name: 'editAdvisor', params: {id: client.id}}" class="button small primary ">
                                 Edit
                             </router-link>
                             <a href="#"
                                class="button small alert"
-                               v-on:click="confirmDelete(advisor.id, index)">
+                               v-on:click="confirmDelete(client.id, index)">
                                 Delete
                             </a>
                         </td>
                     </tr>
                     </tbody>
                 </table>
+
+
             </div>
         </div>
     </div>
@@ -55,23 +44,23 @@
 <script>
 
     export default {
-        name: "IndexAdmin",
+        name: "ViewClients",
 
         data: function () {
             return {
-                advisors: []
+                clients: []
             }
         },
 
         mounted() {
             let app = this;
-            axios.get('/api/v1/advisors')
+            axios.get('/api/v1/clients')
                 .then(function (resp) {
-                    app.advisors = resp.data;
+                    app.clients = resp.data;
                 })
                 .catch(function (resp) {
                     console.log(resp);
-                    alert("Could not load Advisors List");
+                    alert("Could not load Clients List");
                 });
         },
 
@@ -79,18 +68,18 @@
             deleteEntry(id, index) {
                 let app = this;
                 // if (confirm("Do you really want to delete an FA?")) { // implement call confirm delete elemenmt ui
-                axios.delete('/api/v1/advisors/' + id)
+                axios.delete('/api/v1/clients/' + id)
                     .then(function (resp) {
                         app.advisors.splice(index, 1);
                     })
                     .catch(function (resp) {
-                        alert("Could not delete FA");
+                        alert("Could not delete Client");
                     });
                 // }
             },
 
             confirmDelete(id, index) {
-                this.$confirm('Do you really want to delete an FA?', 'Warning', {
+                this.$confirm('Do you really want to delete an Client?', 'Warning', {
                     confirmButtonText: 'OK',
                     cancelButtonText: 'Cancel',
                     type: 'warning'
@@ -112,6 +101,7 @@
         }
     }
 </script>
+
 
 <style scoped>
 

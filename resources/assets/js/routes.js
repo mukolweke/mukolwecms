@@ -1,12 +1,20 @@
 import Admin_Index from './components/admin/advisors/IndexAdmin'
 import Create_Advisor from './components/admin/advisors/CreateFA'
 import Edit_Advisor from './components/admin/advisors/EditFA'
+import View_Clients from './components/admin/clients/ViewClients'
 
 
 export const routes = [
     {
-        path: '/admin_dash',
+        path: '/view_fa',
         component: Admin_Index,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/view_clients',
+        component: View_Clients,
         meta: {
             requiresAuth: true
         }
