@@ -11,7 +11,7 @@
         </div>
 
         <div class="card" style="width: 500px;margin: 0 auto;padding-left:50px;">
-            <div class="card-divider">Create new company</div>
+            <div class="card-divider">Create New Financial Advisor</div>
             <div class="card-section">
                 <form v-on:submit="saveForm()">
                     <div class="row">

@@ -48709,6 +48709,9 @@ var index_esm = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_admin_clients_ViewClients___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_admin_clients_ViewClients__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_admin_leads_ViewLeads__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_admin_leads_ViewLeads___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_admin_leads_ViewLeads__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_admin_leads_CreateLead__ = __webpack_require__(222);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_admin_leads_CreateLead___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_admin_leads_CreateLead__);
+
 
 
 
@@ -48741,6 +48744,10 @@ var routes = [{
     path: '/admin_dash/edit/:id',
     component: __WEBPACK_IMPORTED_MODULE_2__components_admin_advisors_EditFA___default.a,
     name: 'editAdvisor'
+}, {
+    path: '/admin_dash/create_lead',
+    component: __WEBPACK_IMPORTED_MODULE_5__components_admin_leads_CreateLead___default.a,
+    name: 'createLead'
 }];
 
 /***/ }),
@@ -48778,7 +48785,7 @@ exports = module.exports = __webpack_require__(19)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48903,7 +48910,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         deleteEntry: function deleteEntry(id, index) {
             var app = this;
-            // if (confirm("Do you really want to delete an FA?")) { // implement call confirm delete elemenmt ui
             axios.delete('/api/v1/advisors/' + id).then(function (resp) {
                 app.advisors.splice(index, 1);
             }).catch(function (resp) {
@@ -49306,7 +49312,7 @@ var render = function() {
       },
       [
         _c("div", { staticClass: "card-divider" }, [
-          _vm._v("Create new company")
+          _vm._v("Create New Financial Advisor")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-section" }, [
@@ -50355,8 +50361,11 @@ var render = function() {
       [
         _c(
           "router-link",
-          { staticClass: "button primary", attrs: { to: "/admin_dash" } },
-          [_vm._v("Back")]
+          {
+            staticClass: "button success",
+            attrs: { to: { name: "createLead" } }
+          },
+          [_vm._v("Create Lead")]
         )
       ],
       1
@@ -106196,6 +106205,445 @@ module.exports = __webpack_require__(19);
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 221 */,
+/* 222 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(223)
+}
+var normalizeComponent = __webpack_require__(15)
+/* script */
+var __vue_script__ = __webpack_require__(225)
+/* template */
+var __vue_template__ = __webpack_require__(226)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-1743c6b2"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/admin/leads/CreateLead.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1743c6b2", Component.options)
+  } else {
+    hotAPI.reload("data-v-1743c6b2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 223 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(224);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(28)("610acfac", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1743c6b2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CreateLead.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1743c6b2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CreateLead.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 224 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(19)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 225 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "CreateLead",
+    data: function data() {
+        return {
+            lead: {
+                name: '',
+                source: '',
+                description: '',
+                advisor_id: ''
+            }
+        };
+    },
+    methods: {
+        saveForm: function saveForm() {
+            event.preventDefault();
+
+            var app = this;
+
+            var newLead = app.lead;
+
+            axios.post('/api/v1/leads', newLead).then(function (resp) {
+                app.successCreate();
+                app.$router.push({ path: '/view_leads' });
+            }).catch(function (resp) {
+                console.log(resp);
+                app.errorCreate();
+                // alert("Could not create an Advisor");
+            });
+        },
+        successCreate: function successCreate() {
+            this.$message({
+                showClose: true,
+                message: 'Lead successfuly created',
+                type: 'success'
+            });
+        },
+        errorCreate: function errorCreate() {
+            this.$message({
+                showClose: true,
+                message: 'Could not create a Lead',
+                type: 'danger'
+            });
+        },
+        sendMail: function sendMail() {
+            event.preventDefault();
+            axios.post('/ConfirmAccountMail').then(function (resp) {
+                app.$router.push({ path: '/view_leads' });
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 226 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "form-group" },
+      [
+        _c(
+          "router-link",
+          { staticClass: "button primary", attrs: { to: "/view_leads" } },
+          [_vm._v("Back")]
+        )
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "card",
+        staticStyle: {
+          width: "500px",
+          margin: "0 auto",
+          "padding-left": "50px"
+        }
+      },
+      [
+        _c("div", { staticClass: "card-divider" }, [_vm._v("Create Lead")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-section" }, [
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  _vm.saveForm()
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "medium-7 cell form-group" }, [
+                  _c("label", [
+                    _vm._v("Lead Name:\n                            "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.lead.name,
+                          expression: "lead.name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", name: "name", required: "" },
+                      domProps: { value: _vm.lead.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.lead, "name", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "medium-7 cell form-group" }, [
+                  _c("label", [
+                    _vm._v("Source:\n                            "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.lead.source,
+                          expression: "lead.source"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", name: "source", required: "" },
+                      domProps: { value: _vm.lead.source },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.lead, "source", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "medium-7 cell form-group" }, [
+                  _c("label", [
+                    _vm._v("Description:\n                            "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.lead.description,
+                          expression: "lead.description"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        name: "description",
+                        id: "description",
+                        rows: "8"
+                      },
+                      domProps: { value: _vm.lead.description },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.lead, "description", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "medium-7 cell form-group" }, [
+                  _c("label", [
+                    _vm._v(
+                      "Assign Financial Advisor:\n                            "
+                    ),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.lead.advisor_id,
+                            expression: "lead.advisor_id"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { name: "rank" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.lead,
+                              "advisor_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Choose FA ...")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "0" } }, [
+                          _vm._v("Mzee Wesley")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "1" } }, [
+                          _vm._v("Mukolwe")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "2" } }, [
+                          _vm._v("Charles")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "3" } }, [
+                          _vm._v("Jane")
+                        ])
+                      ]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(0)
+            ]
+          )
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "medium-7 cell" }, [
+        _c("button", { staticClass: "button success" }, [_vm._v("Create Lead")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1743c6b2", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

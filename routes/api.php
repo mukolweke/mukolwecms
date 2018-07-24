@@ -23,6 +23,7 @@ Route::group(['prefix' => '/v1', 'namespace' => 'Api\V1', 'as' => 'api.'], funct
     Route::resource('advisors', 'FAController', ['except' => ['create', 'edit']]); //
 });
 
+
 Route::group(['prefix' => '/v1', 'namespace' => 'Api\V1', 'as' => 'api.'], function ()
 {
     Route::resource('clients', 'ClientController');

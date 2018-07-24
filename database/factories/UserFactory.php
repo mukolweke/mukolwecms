@@ -39,16 +39,17 @@ $factory->define(App\Lead::class, function (Faker $faker) {
         'name' => $faker->name,
         'source' => $faker->url,
         'description'=>$faker->paragraph,
+        'advisor_id'=>1,
     ];
 });
 
-//
-//$factory->define(App\Email::class, function (Faker $faker) {
-//    return [
-//        'from_email' => $faker->unique()->safeEmail,
-//        'to_email' => $faker->unique()->safeEmail,
-//        'subject' => $faker->title,
-//        'body'=>$faker->paragraph,
-//    ];
-//});
+
+$factory->define(App\Email::class, function (Faker $faker) {
+    return [
+        'from_email' => $faker->unique()->safeEmail,
+        'to_email' => $faker->unique()->safeEmail,
+        'subject' => $faker->title,
+        'body'=>$faker->paragraph,
+    ];
+});
 

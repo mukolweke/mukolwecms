@@ -80,7 +80,6 @@
         methods: {
             deleteEntry(id, index) {
                 let app = this;
-                // if (confirm("Do you really want to delete an FA?")) { // implement call confirm delete elemenmt ui
                 axios.delete('/api/v1/advisors/' + id)
                     .then(function (resp) {
                         app.advisors.splice(index, 1);

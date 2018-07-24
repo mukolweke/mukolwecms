@@ -2,7 +2,7 @@
     <div>
 
         <div class="form-group">
-            <router-link to="/admin_dash" class="button primary">Back</router-link>
+            <router-link :to="{name: 'createLead'}" class="button success">Create Lead</router-link>
         </div>
 
         <div class="card" style="width:1000px;margin-top:30px;">
