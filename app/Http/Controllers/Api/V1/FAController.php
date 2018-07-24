@@ -31,7 +31,11 @@ class FAController extends Controller
           'password'=>bcrypt(request('password')),
           'fa_rank'=>request('rank'),
         ];
+
         $financial_advisor = FinancialAdvisor::create($request_data);
+
+        // call an event to send the email
+
         return $financial_advisor;
     }
 

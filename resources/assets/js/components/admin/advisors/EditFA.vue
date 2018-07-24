@@ -49,7 +49,7 @@
         <div class="form-group">
             <router-link to="/admin_dash" class="btn btn-default">Back</router-link>
         </div>
-{{this.id}}
+
         <div class="card" style="width: 500px;margin: 0 auto;padding-left:50px;">
             <div class="card-divider">Create new company</div>
             <div class="card-section">

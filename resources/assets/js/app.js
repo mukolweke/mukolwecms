@@ -22,8 +22,9 @@ Vue.use(ElementUI, { locale });
 
 // require('./components.js')
 
-Vue.component('view_fa', require('./components/admin/advisors/IndexAdmin'));
+Vue.component('view_fa', require('./components/admin/advisors/ViewAdvisor'));
 Vue.component('view_clients', require('./components/admin/clients/ViewClients'));
+Vue.component('view_leads', require('./components/admin/leads/ViewLeads'));
 
 Vue.use(VueRouter);
 Vue.use(Vuex);

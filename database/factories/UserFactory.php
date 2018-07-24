@@ -32,3 +32,23 @@ $factory->define(App\Client::class, function (Faker $faker) {
         'account_status'=> 0,
     ];
 });
+
+
+$factory->define(App\Lead::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'source' => $faker->url,
+        'description'=>$faker->paragraph,
+    ];
+});
+
+//
+//$factory->define(App\Email::class, function (Faker $faker) {
+//    return [
+//        'from_email' => $faker->unique()->safeEmail,
+//        'to_email' => $faker->unique()->safeEmail,
+//        'subject' => $faker->title,
+//        'body'=>$faker->paragraph,
+//    ];
+//});
+

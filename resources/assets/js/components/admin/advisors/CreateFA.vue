@@ -2,7 +2,12 @@
 <template>
     <div>
         <div class="form-group">
-            <router-link to="/admin_dash" class="btn btn-default">Back</router-link>
+            <router-link to="/view_fa" class="button primary">Back</router-link>
+        </div>
+
+
+        <div class="form-group">
+            <button type="submit" @click="sendMail()" class="button ">Send MAIL</button>
         </div>
 
         <div class="card" style="width: 500px;margin: 0 auto;padding-left:50px;">
@@ -105,6 +110,12 @@
                     message: 'Could not create an Advisor',
                     type: 'danger'
                 });
+            },
+            sendMail(){
+                event.preventDefault();
+                axios.post('/ConfirmAccountMail').then(function (resp) {
+                   app.$router.push({path: '/admin_dash'});
+               })
             }
 
         }
