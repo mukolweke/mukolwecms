@@ -14,72 +14,44 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+<div id="app">
 
-        {{-- top bar  --}}
-        <div class="top-bar">
-
-          <div class="top-bar-left">
+    <div class="top-bar" id="example-menu">
+        <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
-              <li class="menu-text">{{ config('app.name', 'Laravel') }} {{ app()->version() }}</li>
+                <li class="menu-text">CMS</li>
             </ul>
-          </div>
-
-          <div class="top-bar-right">
+        </div>
+        <div class="top-bar-right">
             <ul class="menu">
                 @if (Auth::guest())
                     <li><a href="{{ route('login') }}">Login</a></li>
                     <li><a href="{{ route('register') }}">Register</a></li>
                 @else
-                    <ul class="dropdown menu" data-dropdown-menu>
+                    <ul class="menu" data-dropdown-menu>
                         <li>
                             <a href="#">{{ Auth::user()->name }}</a>
-                            <ul class="menu">
-                                <li>
-                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </li>
-                            </ul>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
                         </li>
                     </ul>
                 @endif
             </ul>
-          </div>
-
-        </div>
-
-        @yield('content')
-        <div class="top-bar">
-            <div class="top-bar-left">
-                <ul class="dropdown menu" data-dropdown-menu>
-                    <li class="menu-text">Site Title</li>
-                    <li>
-                        <a href="#">One</a>
-                        <ul class="menu vertical">
-                            <li><a href="#">One</a></li>
-                            <li><a href="#">Two</a></li>
-                            <li><a href="#">Three</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Two</a></li>
-                    <li><a href="#">Three</a></li>
-                </ul>
-            </div>
-            <div class="top-bar-right">
-                <ul class="menu">
-                    <li><input type="search" placeholder="Search"></li>
-                    <li><button type="button" class="button">Search</button></li>
-                </ul>
-            </div>
         </div>
     </div>
-    <!-- Scripts -->
-    <script src="{{asset('js/public.js')}}"></script>
+
+    @yield('content')
+</div>
+<!-- Scripts -->
+<script src="{{asset('js/public.js')}}"></script>
 
 </body>
 </html>

@@ -10,20 +10,35 @@ require('./bootstrap');
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import StoreData from './store/Store'
 import Vuex from 'vuex'
+import axios from 'axios'
+import {routes} from './routes'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import locale from 'element-ui/lib/locale/lang/en';
+Vue.use(ElementUI, { locale });
 
+
+// require('./components.js')
+
+Vue.component('index_admin', require('./components/admin/advisors/IndexAdmin'));
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
 
-// const store = new Vuex.Store(StoreData)
+
+const store = new Vuex.Store(StoreData)
 
 const router = new VueRouter({
+    routes,
     mode: 'history',
 });
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#admin',
+    router,
+    store,
+    axios,
 });
