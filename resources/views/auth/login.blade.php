@@ -24,7 +24,7 @@
                     @if ($errors->has('email'))
                         <span class="help-text" id="emailHelpText">
                             <strong>{{ $errors->first('email') }}</strong>
-                        </span>
+                        </ span>
                     @endif
                 </div>
 
