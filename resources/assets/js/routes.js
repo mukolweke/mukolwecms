@@ -1,12 +1,29 @@
-import Admin_Index from './components/admin/advisors/IndexAdmin'
+import View_Advisor from './components/admin/advisors/ViewAdvisor'
 import Create_Advisor from './components/admin/advisors/CreateFA'
 import Edit_Advisor from './components/admin/advisors/EditFA'
+import View_Clients from './components/admin/clients/ViewClients'
+import View_Leads from './components/admin/leads/ViewLeads'
+import Create_Lead from './components/admin/leads/CreateLead'
 
 
 export const routes = [
     {
-        path: '/admin_dash',
-        component: Admin_Index,
+        path: '/view_fa',
+        component: View_Advisor,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/view_clients',
+        component: View_Clients,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/view_leads',
+        component: View_Leads,
         meta: {
             requiresAuth: true
         }
@@ -20,5 +37,10 @@ export const routes = [
         path: '/admin_dash/edit/:id',
         component: Edit_Advisor,
         name: 'editAdvisor'
+    },
+    {
+        path: '/admin_dash/create_lead',
+        component: Create_Lead,
+        name: 'createLead'
     },
 ];

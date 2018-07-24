@@ -20,5 +20,29 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => '/v1', 'namespace' => 'Api\V1', 'as' => 'api.'], function ()
 {
-    Route::resource('advisors', 'FAController', ['except' => ['create', 'edit']]);
+    Route::resource('advisors', 'FAController', ['except' => ['create', 'edit']]); //
+});
+
+
+Route::group(['prefix' => '/v1', 'namespace' => 'Api\V1', 'as' => 'api.'], function ()
+{
+    Route::resource('clients', 'ClientController');
+});
+
+
+Route::group(['prefix' => '/v1', 'namespace' => 'Api\V1', 'as' => 'api.'], function ()
+{
+    Route::resource('leads', 'LeadController');
+});
+
+
+
+Route::get('/ConfirmAccountMail', function () {
+
+    $user = 'mukolwecms-326739@inbox.mailtrap.io';
+
+    Mail::to($user)->send(new \App\Mail\ConfirmAccountMail($user));
+
+    dd("Email is Send.");
+
 });

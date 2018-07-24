@@ -4,7 +4,8 @@
             <router-link :to="{name: 'createAdvisor'}" class="button success">Create new FA</router-link>
         </div>
 
-        <div class="card" style="width:700px;margin:0 auto;">
+
+        <div class="card" style="width:1000px;margin-top:30px;">
             <div class="card-divider">Financial Advisors</div>
             <div class="card-section">
                 <table class="table">
@@ -14,7 +15,7 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Rank</th>
-                        <th width="100">&nbsp;</th>
+                        <th width="200">&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -39,8 +40,8 @@
                                 Edit
                             </router-link>
                             <a href="#"
-                               class="button small danger"
-                               v-on:click="deleteEntry(advisor.id, index)">
+                               class="button small alert"
+                               v-on:click="confirmDelete(advisor.id, index)">
                                 Delete
                             </a>
                         </td>
@@ -49,13 +50,14 @@
                 </table>
             </div>
         </div>
+
     </div>
 </template>
 
 <script>
 
     export default {
-        name: "IndexAdmin",
+        name: "ViewAdvisor",
 
         data: function () {
             return {
@@ -64,7 +66,7 @@
         },
 
         mounted() {
-            var app = this;
+            let app = this;
             axios.get('/api/v1/advisors')
                 .then(function (resp) {
                     app.advisors = resp.data;
@@ -77,16 +79,36 @@
 
         methods: {
             deleteEntry(id, index) {
-                if (confirm("Do you really want to delete an FA?")) {
-                    let app = this;
-                    axios.delete('/api/v1/advisors/' + id)
-                        .then(function (resp) {
-                            app.advisors.splice(index, 1);
-                        })
-                        .catch(function (resp) {
-                            alert("Could not delete FA");
-                        });
-                }
+                let app = this;
+                axios.delete('/api/v1/advisors/' + id)
+                    .then(function (resp) {
+                        app.advisors.splice(index, 1);
+                    })
+                    .catch(function (resp) {
+                        alert("Could not delete FA");
+                    });
+                // }
+            },
+
+            confirmDelete(id, index) {
+                this.$confirm('Do you really want to delete an FA?', 'Warning', {
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Cancel',
+                    type: 'warning'
+                }).then(() => {
+
+                    this.deleteEntry(id, index);
+
+                    this.$message({
+                        type: 'success',
+                        message: 'Delete completed'
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: 'Delete canceled'
+                    });
+                });
             }
         }
     }
