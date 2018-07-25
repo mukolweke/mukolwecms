@@ -22,6 +22,18 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
+['name', 'email', 'phone', 'password', 'account_status', 'fa_rank'];
+
+$factory->define(App\FinancialAdvisor::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'email' => $faker->unique()->safeEmail,
+        'phone'=>$faker->phoneNumber,
+        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
+        'account_status'=> 0,
+        'fa_rank'=>$faker->numberBetween(0,3),
+    ];
+});
 
 $factory->define(App\Client::class, function (Faker $faker) {
     return [

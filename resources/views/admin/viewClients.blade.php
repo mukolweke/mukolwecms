@@ -2,6 +2,8 @@
 
 @section('content')
 
+    @include('inc.navbar_admin')
+
     <div id="admin">
 
         <div class="grid-x">

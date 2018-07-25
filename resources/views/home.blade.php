@@ -2,22 +2,12 @@
 
 @section('content')
 
-<div class="container">
+    <div class="container" id="admin">
 
-    <div class="row">
+       @include('inc.navbar_admin')
 
-        <div class="form-container small-6 small-centered columns">
-
-            <div class="callout">
-                You are logged in!
-            </div>
-            <a href="/view_fa">View FA</a>&nbsp;||
-            <a href="/view_clients">View Clients Dash</a>&nbsp;||
-            <a href="/view_leads">View Leads</a>
-        </div>
-
+        <router-view name="ViewAdvisor"></router-view>
+        <router-view></router-view>
     </div>
-
-</div>
 
 @endsection

@@ -2,15 +2,15 @@
 
 @section('content')
 
-<div class="container">
+<div>
+    <div class="jumbo">
+        <h1>Login</h1>
+        <hr>
+    </div>
 
     <div class="row">
 
         <div class="form-container small-6 small-centered columns">
-
-            <div class="form-title text-center">
-                Login
-            </div>
 
             <form class="login-form" method="POST" action="{{ route('login') }}">
 
@@ -24,7 +24,7 @@
                     @if ($errors->has('email'))
                         <span class="help-text" id="emailHelpText">
                             <strong>{{ $errors->first('email') }}</strong>
-                        </ span>
+                        </span>
                     @endif
                 </div>
 
@@ -40,21 +40,10 @@
                     @endif
                 </div>
 
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                    </label>
-                </div>
-
                 <div class="button-plus-link">
-                    <button type="submit" class="button">
-                        Login
+                    <button type="submit" class="button expanded ">
+                        <strong>Login Here</strong>
                     </button>
-
-                    <a href="{{ route('password.request') }}">
-                        &nbsp;
-                        Forgot Your Password?
-                    </a>
                 </div>
             </form>
 

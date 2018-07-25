@@ -36,6 +36,7 @@
                             <p class="help-text">0722000000</p>
                         </div>
                     </div>
+                    <p>kuku</p>
                     <div class="row">
                         <div class="medium-7 cell form-group">
                             <label>Default Password:
@@ -89,12 +90,11 @@
                 axios.post('/api/v1/advisors', newAdvisor)
                     .then(function (resp) {
                         app.successCreate()
-                        app.$router.push({path: '/admin_dash'});
+                        app.$router.push({path: '/view_fa'});
                     })
                     .catch(function (resp) {
                         console.log(resp);
                         app.errorCreate()
-                        // alert("Could not create an Advisor");
                     });
             },
             successCreate() {
@@ -114,7 +114,7 @@
             sendMail(){
                 event.preventDefault();
                 axios.post('/ConfirmAccountMail').then(function (resp) {
-                   app.$router.push({path: '/admin_dash'});
+                   app.$router.push({path: '/view_fa'});
                })
             }
 

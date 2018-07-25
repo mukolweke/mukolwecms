@@ -1,133 +1,74 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <!-- CSRF Token -->
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+@section('content')
+    <div class="container">
 
-        <title>Laravel {{ app()->version() }}</title>
+        {{--<div class="top-bar" id="example-menu">--}}
+        {{--<div class="top-bar-left">--}}
+        {{--<ul class="dropdown menu" data-dropdown-menu>--}}
+        {{--<li class="menu-text">Financial Advisor CMS</li>--}}
+        {{--</ul>--}}
+        {{--</div>--}}
+        {{--<div class="top-bar-right">--}}
+        {{--<ul class="menu">--}}
+        {{--@if (Auth::guest())--}}
+        {{--<li><a href="{{ route('login') }}">Login</a></li>--}}
+        {{--@else--}}
+        {{--<ul class="menu" data-dropdown-menu>--}}
+        {{--<li>--}}
+        {{--<a href="#">{{ Auth::user()->name }}</a>--}}
+        {{--</li>--}}
+        {{--<li>--}}
+        {{--<a href="{{ route('logout') }}"--}}
+        {{--onclick="event.preventDefault();document.getElementById('logout-form').submit();">--}}
+        {{--Logout--}}
+        {{--</a>--}}
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .versioninfo {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-            }
-
-            .framwork_title {
-                font-weight: 600;
-                padding-top: 20px;
-            }
-
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
-
-            <div class="content">
-
-                <div class="title m-b-md">
-                    CMS
-                    <p class="versioninfo">Version {{ app()->version() }}</p>
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-
-                <div class="foundation_button_test">
-                    <p class="framwork_title">Zurb Foundation 6.4.3</p>
-                    <a class="button primary" href="#">Primary</a>
-                    <a class="button secondary" href="#">Secondary</a>
-                    <a class="button success" href="#">Success</a>
-                    <a class="button alert" href="#">Alert</a>
-                    <a class="button warning" href="#">Warning</a>
-                </div>
-
+        {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+        {{--{{ csrf_field() }}--}}
+        {{--</form>--}}
+        {{--</li>--}}
+        {{--</ul>--}}
+        {{--@endif--}}
+        {{--</ul>--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        <div class="jumbotron text-center">
+            <h1>Financial <strong>Advisor</strong></h1>
+            <h4>Client Management System</h4>
+            <p>FAs are able to automate there process of client management</p>
+            <div>
+                <a href="{{ route('login') }}" class="button primary login_button"><strong>LOGIN HERE</strong></a>
             </div>
         </div>
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/public.js') }}"></script>
+        <hr>
 
-    </body>
-</html>
+        <div class="grid-x medium-offset-2 grid-margin-x small-up-2 medium-up-3 large-up-6">
+            <div class="cell my_cell" style="width: 320px;">
+                <img class="thumbnail" src="{{ asset('images/placeholder.jpeg')  }}">
+                <h5>FA able to creates Clients</h5>
+                <p>One of the final steps in every web-project is deploying to live server. Often I see a problem
+                    when server is provided by the client from their hosting they had purchased long time ago,
+                    and it is not suitable for convenient Laravel deployment. So in this article I will
+                    make some recommendations for clients, what hosting to prepare.</p>
+            </div>
+            <div class="cell my_cell" style="width: 320px;">
+                <img class="thumbnail" src="{{ asset('images/placeholder.jpeg')  }}">
+                <h5>FA able to schedule Follow-ups</h5>
+                <p>Sending email is a typical function for most web-projects: notifications, password reminders,
+                    invoices are done via email.
+                    But in recent years we’ve faced a technical problem. It’s not about just
+                    sending emails anymore, it’s about delivering them successfully</p>
+            </div>
+            <div class="cell my_cell" style="width: 320px;">
+                <img class="thumbnail" src="{{ asset('images/placeholder.jpeg')  }}">
+                <h5>Client Management automation</h5>
+                <p>Laravel-Excel package is great for exporting data. But not a lot of info there about formatting Excel
+                    cells – widths, word wraps, fonts etc. So when I encountered this in a client’s project,
+                    I decided to write this article with a few tips on this topic.</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+@endsection
