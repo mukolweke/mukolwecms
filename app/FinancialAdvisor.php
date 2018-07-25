@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class FinancialAdvisor extends Model
+class FinancialAdvisor extends Authenticatable
 {
     protected $fillable = ['name', 'email', 'phone', 'password', 'account_status', 'fa_rank'];
 }

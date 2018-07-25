@@ -1,55 +1,46 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="container">
 
-<div>
-    <div class="jumbo">
-        <h1>Login</h1>
-        <hr>
-    </div>
-
-    <div class="row">
-
-        <div class="form-container small-6 small-centered columns">
-
-            <form class="login-form" method="POST" action="{{ route('login') }}">
-
-                {{ csrf_field() }}
-
-                <div class="email">
-                    <label for="email">E-Mail Address</label>
-
-                    <input id="email" type="email" name="email" value="{{ old('email') }}" aria-describedby="emailHelpText" required autofocus>
-
-                    @if ($errors->has('email'))
-                        <span class="help-text" id="emailHelpText">
-                            <strong>{{ $errors->first('email') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
-                <div class="password">
-                    <label for="password">Password</label>
-
-                    <input id="password" type="password" name="password" aria-describedby="passwordHelpText" required>
-
-                    @if ($errors->has('password'))
-                        <span class="help-text" id="passwordHelpText">
-                            <strong>{{ $errors->first('password') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
-                <div class="button-plus-link">
-                    <button type="submit" class="button expanded ">
-                        <strong>Login Here</strong>
-                    </button>
-                </div>
-            </form>
-
+        <div class="jumbotron text-center">
+            <h1>Financial <strong>Advisor</strong></h1>
+            <h4>Client Management System</h4>
+            <p>FAs are able to automate there process of client management</p>
+            <div>
+                <a href="/admin/login" class="button primary login_button"><strong>LOGIN ADMIN</strong></a>
+                <a href="advisor/login" class="button primary login_button"><strong>LOGIN ADVISOR</strong></a>
+                <a href="client/login" class="button primary login_button"><strong>LOGIN CLIENT</strong></a>
+            </div>
         </div>
 
-    </div>
+        <hr>
 
-</div>
+        <div class="grid-x medium-offset-2 grid-margin-x small-up-2 medium-up-3 large-up-6">
+            <div class="cell my_cell" style="width: 320px;">
+                <img class="thumbnail" src="{{ asset('images/placeholder.jpeg')  }}">
+                <h5>FA able to creates Clients</h5>
+                <p>One of the final steps in every web-project is deploying to live server. Often I see a problem
+                    when server is provided by the client from their hosting they had purchased long time ago,
+                    and it is not suitable for convenient Laravel deployment. So in this article I will
+                    make some recommendations for clients, what hosting to prepare.</p>
+            </div>
+            <div class="cell my_cell" style="width: 320px;">
+                <img class="thumbnail" src="{{ asset('images/placeholder.jpeg')  }}">
+                <h5>FA able to schedule Follow-ups</h5>
+                <p>Sending email is a typical function for most web-projects: notifications, password reminders,
+                    invoices are done via email.
+                    But in recent years we’ve faced a technical problem. It’s not about just
+                    sending emails anymore, it’s about delivering them successfully</p>
+            </div>
+            <div class="cell my_cell" style="width: 320px;">
+                <img class="thumbnail" src="{{ asset('images/placeholder.jpeg')  }}">
+                <h5>Client Management automation</h5>
+                <p>Laravel-Excel package is great for exporting data. But not a lot of info there about formatting Excel
+                    cells – widths, word wraps, fonts etc. So when I encountered this in a client’s project,
+                    I decided to write this article with a few tips on this topic.</p>
+            </div>
+        </div>
+    </div>
+    <hr>
 @endsection

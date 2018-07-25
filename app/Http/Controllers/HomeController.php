@@ -14,11 +14,11 @@ class HomeController extends Controller
 
     public function index_admin()
     {
-        return view('home_admin');
+        return view('admin.home_admin');
     }
 
     public function index_advisor()
     {
-        return view('home_advisor');
+        return view('advisor.home_advisor');
     }
 }

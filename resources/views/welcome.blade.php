@@ -38,7 +38,9 @@
             <h4>Client Management System</h4>
             <p>FAs are able to automate there process of client management</p>
             <div>
-                <a href="{{ route('login') }}" class="button primary login_button"><strong>LOGIN HERE</strong></a>
+                <a href="/admin/login" class="button primary login_button"><strong>LOGIN ADMIN</strong></a>
+                <a href="advisor/login" class="button primary login_button"><strong>LOGIN ADVISOR</strong></a>
+                <a href="client/login" class="button primary login_button"><strong>LOGIN CLIENT</strong></a>
             </div>
         </div>
 
