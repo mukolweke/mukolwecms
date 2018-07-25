@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Events\FinancialAdvisorWasCreated;
 use App\FinancialAdvisor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Event;
 
 class FAController extends Controller
 {
@@ -20,6 +22,8 @@ class FAController extends Controller
 
     public function store(Request $request)
     {
+        dd('imefika');
+
         $this->validate($request,[
             'email' => 'unique:FinancialAdvisor|max:255',
         ]);
@@ -35,6 +39,9 @@ class FAController extends Controller
         $financial_advisor = FinancialAdvisor::create($request_data);
 
         // call an event to send the email
+        $event = new FinancialAdvisorWasCreated($financial_advisor);
+
+        Event::fire($event);
 
         return $financial_advisor;
     }

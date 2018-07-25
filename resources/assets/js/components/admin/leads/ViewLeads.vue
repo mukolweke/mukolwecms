@@ -5,28 +5,32 @@
             <router-link :to="{name: 'createLead'}" class="button success">Create Lead</router-link>
         </div>
 
-        <div class="card" style="width:1000px;margin-top:30px;">
+        <div class="card">
             <div class="card-divider">Leads List</div>
             <div class="card-section">
 
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Name</th>
+                        <th width="200">Name</th>
                         <th>Source</th>
-                        <th width="200">Description</th>
                         <th width="200">FA assigned</th>
+                        <th>Description</th>
                         <th>Date</th>
                         <th width="200">&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-for="lead, index in leads">
+
                         <td>{{ lead.name }}</td>
+
                         <td><a :href="lead.source">View</a></td>
-                        <td>{{ lead.description }}</td>
-                        <td>kuku</td>
+
                         <td>{{ lead.created_at }}</td>
+
+                        <td>{{ lead.description }}</td>
+
                         <td>
                             <router-link :to="{name: 'editAdvisor', params: {id: lead.id}}" class="button small primary ">
                                 Edit
