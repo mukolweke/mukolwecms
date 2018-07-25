@@ -23,4 +23,5 @@ class PagesController extends Controller
     {
         return view('admin.viewLeads');
     }
+
 }

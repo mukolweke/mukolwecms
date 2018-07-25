@@ -10,6 +10,13 @@
 
     <title>Financial Advisor CMS</title>
 
+    <!-- Scripts -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+
+    <script src="{{asset('js/public.js')}}"></script>
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -17,8 +24,10 @@
 <div id="app">
     @yield('content')
 </div>
-<!-- Scripts -->
-<script src="{{asset('js/public.js')}}"></script>
 
+
+<script>
+    $(document).foundation();
+</script>
 </body>
 </html>

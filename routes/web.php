@@ -11,7 +11,7 @@ Route::get('/', function () {
 Auth::routes();
 
 // admin routes
-Route::get('/home_admin', 'HomeController@index_admin')->name('home_admin');
+//Route::get('/home_admin', 'HomeController@index_admin');index_admin
 
 Route::get('/view_fa', 'PagesController@viewAdvisor');
 
@@ -21,6 +21,12 @@ Route::get('/view_leads', 'PagesController@viewLeads');
 
 // advisor routes
 Route::get('/home_advisor', 'HomeController@index_advisor')->name('home_advisor');
+
+Route::get('view_client', 'Api\V1\ClientController@index');
+
+Route::get('/view_schedule_index', 'FollowUpController@index')->name('view_schedule_index');
+
+Route::post('/addSchedule', 'FollowUpController@addSchedule')->name('addSchedule');
 
 // mixed routes
 Route::get('/login_redirect', 'AdminLoginController@redirectLoginPath');
@@ -39,16 +45,16 @@ Route::post('home_admin', 'Auth\AdminLoginController@login')->name('home_admin')
 
 Route::get('advisor/login', 'Auth\AdvisorLoginController@showLoginForm');
 
-Route::post('advisor/login', 'Auth\AdvisorLoginController@login');
+Route::post('home_advisor', 'Auth\AdvisorLoginController@login')->name('home_advisor');
 
 Route::get('client/login', 'Auth\ClientLoginController@showLoginForm');
 
 Route::post('client/login', 'Auth\ClientLoginController@login');
 
 
-Route::group(['prefix' => 'admin','middleware' => 'assign.guard:admin,home_admin'],function(){
+Route::group(['prefix' => 'admin','middleware' => 'assign.guard:admin,/home_admin'],function(){
 
-    Route::get('home_admin',function ()
+    Route::get('/home_admin',function ()
     {
         return view('admin.home_admin');
     });

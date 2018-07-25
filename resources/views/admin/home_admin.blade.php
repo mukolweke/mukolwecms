@@ -2,12 +2,12 @@
 
 @section('content')
 
-    {{--<div class="container" id="admin">--}}
+    <div class="container" id="admin">
 
-       {{--@include('inc.navbar_admin')--}}
+       @include('inc.navbar_admin')
 
-        {{--<router-view name="ViewAdvisor"></router-view>--}}
-        {{--<router-view></router-view>--}}
-    {{--</div>--}}
+        <router-view name="ViewAdvisor"></router-view>
+        <router-view></router-view>
+    </div>
 
 @endsection

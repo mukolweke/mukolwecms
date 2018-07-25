@@ -4,7 +4,7 @@
 
     <div class="container" id="admin">
 
-       @include('inc.navbar_admin')
+       @include('inc.navbar_advisor')
 
         <router-view name="ViewAdvisor"></router-view>
         <router-view></router-view>

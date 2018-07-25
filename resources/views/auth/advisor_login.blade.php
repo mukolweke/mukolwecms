@@ -12,7 +12,7 @@
 
         <div class="form-container small-6 small-centered columns">
 
-            <form class="login-form" method="POST" action="/advisor/login">
+            <form class="login-form" method="POST" action="{{route('home_advisor')}}">
 
                 {{ csrf_field() }}
 

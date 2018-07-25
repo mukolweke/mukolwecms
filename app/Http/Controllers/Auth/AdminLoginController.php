@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AdminLoginController extends Controller
 {
@@ -53,5 +56,52 @@ class AdminLoginController extends Controller
         return view('auth.admin_login');
     }
 
+    public function login(Request $request)
+    {
+
+        $email = $request->input('email');
+        $password = $request->input('password');
+
+        // Check if user is using email or username
+        $field = filter_var($email, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        $credentials = [
+            $field => $email,
+            'password' => $password,
+        ];
+
+        $passwd = (Admin::where('email', $email)->first()->password);
+
+        if(Hash::check($password, $passwd))
+        {
+            return view('admin.home_admin');
+
+        }else{
+
+            return view('auth.admin_login');
+
+        }
+
+    }
 
 }
+
+
+
+
+//        // check if user is authentic
+//        if (auth()->attempt($credentials)) {
+//            // check if email has been verified
+//            if (!auth()->user()->verified()) {
+//                auth()->logout();
+//                session()->flash('error', 'You must verify your email before you can access the site. ' .
+//                    '<br>If you have not received the confirmation email check your spam folder. ' .
+//                    '<b><a class="alert-link" href="' . route('resend.email') . '" class="alert-link">Click here</a></b> for the option to resend.');
+//                return redirect()->route('home');
+//            }
+//            //event(new UserHasLoggedIn(auth()->user()));
+//            session()->flash('success', 'Successfully logged in!');
+//            return redirect()->intended(route('home'));
+//        }
+//        session()->flash('error', 'Your [Username/Email] and/or Password is incorrect!');
+//        return redirect()->back()->withInput();
