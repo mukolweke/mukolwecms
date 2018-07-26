@@ -46,14 +46,13 @@ class FAController extends Controller
         $this->mail->send($request);
 
 
-
         return $financial_advisor;
     }
 
 
     public function show($id)
     {
-        return FinancialAdvisor::findOrFail($id)->paginate(5);
+        return FinancialAdvisor::findOrFail($id);
     }
 
     public function edit($id)
@@ -64,16 +63,12 @@ class FAController extends Controller
 
     public function update(Request $request, $id)
     {
-        $financial_advisor = FinancialAdvisor::findOrFail($id)
-            ->update($request->all());
-
-        return $financial_advisor;
+        return $this->fa_repo->updateAdvisor($request, $id);
     }
 
     public function destroy($id)
     {
-        $financial_advisor = FinancialAdvisor::findOrFail($id)
-            ->delete();
+       $this->fa_repo->deleteAdvisor($id);
         return '';
     }
 }

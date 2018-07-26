@@ -16,13 +16,13 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th width="200">Name</th>
+                            <th>Name</th>
                             <th>Source</th>
-                            <th width="200">FA assigned</th>
+                            <th>FA Assigned</th>
                             <th>Description</th>
                             <th>Date</th>
-                            <th width="200">&nbsp;</th>
-                            <th width="200">&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -32,12 +32,16 @@
 
                             <td><a :href="lead.source">View</a></td>
 
+                            <td>mike</td>
+
+                            <td>description</td>
+                            <!--//{{ lead.description}}-->
                             <td>{{ lead.created_at }}</td>
 
-                            <td>{{ lead.description }}</td>
+
 
                             <td>
-                                <router-link :to="{name: 'editAdvisor', params: {id: lead.id}}" class="button small primary ">
+                                <router-link :to="{name: 'editLead', params: {id: lead.id}}" class="button small primary ">
                                     Edit
                                 </router-link>
                             </td>
@@ -51,6 +55,7 @@
                         </tr>
                         </tbody>
                     </table>
+
                 </div>
 
             </div>
@@ -102,7 +107,7 @@
 
             confirmDelete(id, index)
             {
-                this.$confirm('Do you really want to delete an Client?', 'Warning',
+                this.$confirm('Deleting Lead?', 'Warning',
                     {
                     confirmButtonText: 'OK',
                     cancelButtonText: 'Cancel',
@@ -140,5 +145,6 @@
 
 
 <style scoped>
-
+    /*table {border-collapse:collapse; table-layout:fixed; width:310px;}*/
+    table td {width:100px; word-wrap:break-word;}
 </style>

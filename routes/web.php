@@ -77,4 +77,6 @@ Route::group(['prefix' => 'client','middleware' => 'assign.guard:client,client/l
     });
 });
 
+//Route::get('/{any}', 'HomeController@index')->where('any', '.*');
+
 //Route::get('/home', 'HomeController@index')->name('home');

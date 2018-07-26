@@ -6,10 +6,6 @@
         </div>
 
 
-        <!--<div class="form-group">-->
-            <!--<button type="submit" @click="sendMail()" class="button ">Send MAIL</button>-->
-        <!--</div>-->
-
         <div class="card">
             <div class="card-divider">Create New Financial Advisor</div>
             <div class="card-section create_fa">
@@ -53,6 +49,7 @@
                             </label>
                         </div>
                     </div>
+
                     <input type="text" v-model="advisor.activation_code" name="activation_code" class="hidden">
                     <div class="grid-x">
                         <div class="medium-7 cell form-group">

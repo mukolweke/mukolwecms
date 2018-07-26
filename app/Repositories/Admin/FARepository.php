@@ -24,7 +24,6 @@ class FARepository
     // create advisor
     public function createAdvisor()
     {
-
         $request_data = [
             'name' => request('name'),
             'email' => request('email'),
@@ -37,5 +36,20 @@ class FARepository
         return FinancialAdvisor::create($request_data);
     }
 
+    public function updateAdvisor($request, $id)
+    {
+        $financial_advisor = FinancialAdvisor::findOrFail($id);
+
+        $financial_advisor->update($request->all());
+
+        return response()->json(['success' => true]);
+    }
+
+
+    public function deleteAdvisor($id)
+    {
+        $financial_advisor = FinancialAdvisor::findOrFail($id)
+            ->delete();
+    }
 
 }

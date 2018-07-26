@@ -1,12 +1,11 @@
 <template>
     <div>
         <div class="form-group">
-            <router-link to="/view_leads" class="button primary">Back</router-link>
+            <router-link to="/view_leads" class="btn btn-default">Back</router-link>
         </div>
 
-
         <div class="card">
-            <div class="card-divider">Create Lead</div>
+            <div class="card-divider">Edit &nbsp;<strong>&nbsp;{{lead.name}}</strong></div>
             <div class="card-section create_fa">
 
                 <form v-on:submit="saveForm()">
@@ -46,7 +45,7 @@
                         </div>
                     </div>
                     <div class="grid-x">
-                    <div class="medium-7 cell form-group">
+                        <div class="medium-7 cell form-group">
                             <button class="button success">Create Lead</button>
                         </div>
                     </div>
@@ -57,11 +56,24 @@
     </div>
 </template>
 
+
 <script>
     export default {
-        name: "CreateLead",
+        mounted() {
+
+            axios.get('/api/v1/leads/' + this.$route.params.id)
+                .then(({data}) => {
+                    this.lead = data;
+                }, () => {
+                    console.log("Error");
+                })
+        },
+
+        props: ['id'],
+
         data: function () {
             return {
+                leadsId: this.$route.params.id,
                 lead: {
                     name: '',
                     source: '',
@@ -71,49 +83,30 @@
                 },
             }
         },
+
         methods: {
             saveForm() {
+                let app = this;
                 event.preventDefault();
 
-                let app = this;
+                axios.patch('/api/v1/leads/' + app.leadsId, app.lead)
+                    .then((response) => {
+                        let data = response.data;
 
-                let newLead = app.lead;
-
-                axios.post('/api/v1/leads', newLead)
-                    .then(function (resp) {
-                        app.successCreate()
-                        app.$router.push({path: '/view_leads'});
+                        if (data.success){
+                            app.$router.push({path: '/view_leads'});
+                        }
+                    }, () => {
+                        console.log('Error')
                     })
-                    .catch(function (resp) {
-                        console.log(resp);
-                        app.errorCreate()
-                    });
             },
             successCreate() {
                 this.$message({
                     showClose: true,
-                    message: 'Lead successfuly created',
+                    message: 'Financial Advisor Updated.',
                     type: 'success'
                 });
             },
-            errorCreate() {
-                this.$message({
-                    showClose: true,
-                    message: 'Could not create a Lead',
-                    type: 'danger'
-                });
-            },
-            sendMail() {
-                event.preventDefault();
-                axios.post('/ConfirmAccountMail').then(function (resp) {
-                    app.$router.push({path: '/view_leads'});
-                })
-            }
-
-        }
+        },
     }
 </script>
-
-<style scoped>
-
-</style>

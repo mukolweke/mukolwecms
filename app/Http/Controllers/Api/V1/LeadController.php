@@ -38,10 +38,11 @@ class LeadController extends Controller
 
     public function update(Request $request, $id)
     {
-        $lead = Lead::findOrFail($id)
-            ->update($request->all());
+        $lead = Lead::findOrFail($id);
 
-        return $lead;
+            $lead->update($request->all());
+
+        return response()->json(['success' => true]);;
     }
 
     public function destroy($id)
