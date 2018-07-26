@@ -28,6 +28,7 @@ Route::get('/view_schedule_index', 'FollowUpController@index')->name('view_sched
 
 Route::post('/addSchedule', 'FollowUpController@addSchedule')->name('addSchedule');
 
+
 // mixed routes
 Route::get('/login_redirect', 'AdminLoginController@redirectLoginPath');
 
@@ -48,6 +49,8 @@ Route::get('/home_admin_dash', 'PagesController@adminDash');
 Route::get('advisor/login', 'Auth\AdvisorLoginController@showLoginForm');
 
 Route::post('home_advisor', 'Auth\AdvisorLoginController@login')->name('home_advisor');
+
+Route::post('/advisor_verify', 'Auth\AdvisorLoginController@verify')->name('advisor_verify');
 
 Route::get('client/login', 'Auth\ClientLoginController@showLoginForm');
 

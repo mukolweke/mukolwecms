@@ -45,7 +45,6 @@ class FARepository
         return response()->json(['success' => true]);
     }
 
-
     public function deleteAdvisor($id)
     {
         $financial_advisor = FinancialAdvisor::findOrFail($id)
