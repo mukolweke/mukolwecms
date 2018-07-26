@@ -59543,14 +59543,8 @@ if (inBrowser && window.Vue) {
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
-    state: {
-        welcome: 'Testing ...'
-    },
-    getters: {
-        welcome: function welcome(state) {
-            return state.welcome;
-        }
-    },
+    state: {},
+    getters: {},
     mutations: {},
     actions: {}
 });
@@ -61187,7 +61181,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(resp);
                 alert("Could not Update Avisors Details");
             });
+        },
+        editVehicle: function editVehicle(vehicle) {
+            this.$router.push({ name: 'editvehicles_route', params: { id: vehicle } });
         }
+    },
+    created: function created() {
+        this.advisor = this.$route.params.id;
     }
 });
 

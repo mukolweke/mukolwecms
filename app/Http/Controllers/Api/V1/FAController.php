@@ -4,19 +4,23 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Events\FinancialAdvisorWasCreated;
 use App\FinancialAdvisor;
+use App\Http\Controllers\EmailController;
 use App\Repositories\Admin\FARepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Mail;
 
 class FAController extends Controller
 {
 
     protected $fa_repo;
+    protected $mail;
 
-    public function __construct(FARepository $fa_repo)
+    public function __construct(FARepository $fa_repo, EmailController $mail)
     {
         $this->fa_repo = $fa_repo;
+        $this->mail = $mail;
     }
 
     public function index()
@@ -36,21 +40,12 @@ class FAController extends Controller
             'email' => 'unique:financial_advisors|max:255',
         ]);
 
-        $request_data = [
-            'name' => request('name'),
-            'email' => request('email'),
-            'phone' => request('phone'),
-            'password' => bcrypt(request('password')),
-            'fa_rank' => request('rank'),
-            'activation_code' => request('activation_code'),
-        ];
+        $financial_advisor = $this->fa_repo->createAdvisor($request);
 
-        $financial_advisor = FinancialAdvisor::create($request_data);
 
-//        // call an event to send the email
-//        $event = new FinancialAdvisorWasCreated($financial_advisor);
-//
-//        Event::fire($event);
+        $this->mail->send($request);
+
+
 
         return $financial_advisor;
     }

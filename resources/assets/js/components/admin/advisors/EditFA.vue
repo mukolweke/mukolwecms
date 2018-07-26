@@ -23,7 +23,7 @@
                     phone: '',
                     password: '',
                     rank: '',
-                }
+                },
             }
         },
         methods: {
@@ -39,7 +39,13 @@
                         console.log(resp);
                         alert("Could not Update Avisors Details");
                     });
+            },
+            editVehicle(vehicle){
+                this.$router.push({name: 'editvehicles_route', params:{id:vehicle}});
             }
+        },
+        created(){
+            this.advisor = this.$route.params.id;
         }
     }
 </script>
