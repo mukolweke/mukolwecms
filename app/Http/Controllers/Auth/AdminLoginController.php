@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class AdminLoginController extends Controller
 {
@@ -41,7 +43,8 @@ class AdminLoginController extends Controller
 
     public function redirectTo()
     {
-        return view('admin.home_admin');
+        $validator = '';
+        return view('admin.home_admin', compact('validator'));
     }
 
 
@@ -53,7 +56,9 @@ class AdminLoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('auth.admin_login');
+        $validator ='';
+
+        return view('auth.admin_login', compact('validator'));
     }
 
     public function login(Request $request)
@@ -70,16 +75,19 @@ class AdminLoginController extends Controller
             'password' => $password,
         ];
 
-        $passwd = (Admin::where('email', $email)->first()->password);
 
-        if(Hash::check($password, $passwd))
-        {
+        $user = Admin::where('email', $email)->first();
+
+        if ($user === null) {
+            $validator = "Your [Username/Email] and/or Password is incorrect!";
+
+            return view('auth.admin_login', compact('validator'));
+        }
+
+        if (Admin::where('email',$email)->exists()) {
+            \Session::flash('success', 'Successfully logged in!');
+
             return view('admin.home_admin');
-
-        }else{
-
-            return view('auth.admin_login');
-
         }
 
     }

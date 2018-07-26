@@ -7,7 +7,7 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
-use MaddHatter\LaravelFullcalendar\Calendar;
+use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 
 class FollowUpController extends Controller
 {
@@ -16,17 +16,16 @@ class FollowUpController extends Controller
     {
         $followups =  FollowUp::all();
         $followupsList = [];
-        foreach ($followups as $key=>$followup){
-            $followupsList = Calendar::event(
+        foreach ($followups as $key => $followup){
+            $followupsList[] = Calendar::event(
                 $followup->name,
                 true,
                 new \DateTime($followup->start_date),
-                new \DateTime($followup->end_date.'+1 day')
+                new \DateTime($followup->end_date.' +1 day')
             );
         }
-//        dd($followupsList);
 
-        $calendar_details = \Calendar::addEvents($followupsList);
+        $calendar_details = Calendar::addEvents($followupsList);
 
         return view('advisor.create_followup_schedule', compact('calendar_details'));
     }

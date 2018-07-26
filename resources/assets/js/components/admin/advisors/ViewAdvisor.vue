@@ -67,7 +67,7 @@
 
         mounted() {
             let app = this;
-            axios.get('/api/v1/advisors')
+            axios.get('/api/v1/advisor/')
                 .then(function (resp) {
                     app.advisors = resp.data;
                 })
@@ -80,7 +80,7 @@
         methods: {
             deleteEntry(id, index) {
                 let app = this;
-                axios.delete('/api/v1/advisors/' + id)
+                axios.delete('/api/v1/advisor/' + id)
                     .then(function (resp) {
                         app.advisors.splice(index, 1);
                     })

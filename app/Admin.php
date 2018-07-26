@@ -15,4 +15,8 @@ class Admin extends Authenticatable
         return Admin::all();
     }
 
+//    protected $hidden = [
+//        'password', 'remember_token',
+//    ];
+
 }

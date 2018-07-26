@@ -50,7 +50,8 @@
             return {
                 clients: [],
                 url:'/api/v1/clients',
-                pagination:[]
+                pagination:[],
+                noLeads:''
             }
         },
 
@@ -62,7 +63,7 @@
                 })
                 .catch(function (resp) {
                     console.log(resp);
-                    alert("Could not load Clients List");
+                    app.noLeads = true;
                 });
         },
 

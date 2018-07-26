@@ -39,9 +39,11 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
 
 // login routes
-Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm');
+Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm')->name('login_form');
 
 Route::post('home_admin', 'Auth\AdminLoginController@login')->name('home_admin');
+
+Route::get('/home_admin_dash', 'PagesController@adminDash');
 
 Route::get('advisor/login', 'Auth\AdvisorLoginController@showLoginForm');
 

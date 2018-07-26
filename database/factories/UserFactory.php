@@ -31,6 +31,7 @@ $factory->define(App\FinancialAdvisor::class, function (Faker $faker) {
         'phone'=>$faker->phoneNumber,
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'account_status'=> 0,
+        'activation_code'=>$faker->numberBetween(1000,9999),
         'fa_rank'=>$faker->numberBetween(0,3),
     ];
 });

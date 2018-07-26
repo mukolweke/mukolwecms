@@ -65,6 +65,7 @@
                     source: '',
                     description: '',
                     advisor_id: '',
+                    noLeads: false,
                 },
             }
         },
@@ -84,7 +85,6 @@
                     .catch(function (resp) {
                         console.log(resp);
                         app.errorCreate()
-                        // alert("Could not create an Advisor");
                     });
             },
             successCreate() {
