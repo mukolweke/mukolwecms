@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Client;
 use App\FinancialAdvisor;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -86,7 +87,9 @@ class AdvisorLoginController extends Controller
 
             if(Hash::check($password, $passwd))
             {
-                return view('advisor.home_advisor');
+                $all_clients = Client::all();
+
+                return view('advisor.home_advisor', compact('all_clients'));
 
             }else{
 

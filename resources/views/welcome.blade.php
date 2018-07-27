@@ -40,7 +40,7 @@
             <div>
                 <a href="/admin/login" class="button primary login_button"><strong>LOGIN ADMIN</strong></a>
                 <a href="advisor/login" class="button primary login_button"><strong>LOGIN ADVISOR</strong></a>
-                <a href="client/login" class="button primary login_button"><strong>LOGIN CLIENT</strong></a>
+                <a href="{{route('client_login')}}" class="button primary login_button"><strong>LOGIN CLIENT</strong></a>
             </div>
         </div>
 

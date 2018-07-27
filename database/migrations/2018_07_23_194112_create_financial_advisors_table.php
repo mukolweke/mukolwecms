@@ -27,8 +27,6 @@ class CreateFinancialAdvisorsTable extends Migration
             $table->softDeletes();
 
 
-            //relation to users table ...
-
         });
     }
 

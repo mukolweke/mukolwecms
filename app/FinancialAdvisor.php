@@ -5,8 +5,6 @@ namespace App;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
-//use App\AdvisorModel;
-
 
 class FinancialAdvisor extends Model
 {
@@ -19,4 +17,21 @@ class FinancialAdvisor extends Model
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function client()
+    {
+        return $this->hasMany('App\Client');
+    }
+
+    public function lead()
+    {
+        return $this->hasMany('App\Lead');
+
+    }
+
+    public function followup()
+    {
+        return $this->hasMany('App\FollowUp');
+
+    }
 }

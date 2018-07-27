@@ -16,9 +16,12 @@
 
                     <p class="text-center" style="margin-top: 50px;">Please enter the code sent to you in mail</p>
 
+                    @if($data['err'] != null)
                     <div class="callout alert text-center" style="height: 50px;">
                         <span>{{$data['err']}}</span>
                     </div>
+                    @endif
+
                     {{ csrf_field() }}
 
                     <div class="form-group">
