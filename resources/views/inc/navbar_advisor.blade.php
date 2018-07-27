@@ -5,7 +5,7 @@
             <li class="menu-text hide-for-small-only"><a href="/home_advisor_dash">Advisor &centerdot; Dashboard</a> </li>
             <li class="menu-text"><a href="/view_client_advisor">Clients Dashboard</a></li>
             <li class="menu-text"><a href="/view_leads_advisor">Leads Dashboard</a></li>
-            <li class="menu-text"><a href="#">Followups Dashboard</a></li>
+            <li class="menu-text"><a href="/view_followups">Followups Dashboard</a></li>
             <li class="menu-text"><a href="/view_schedule_index">Calender Dashboard</a></li>
         </ul>
     </div>

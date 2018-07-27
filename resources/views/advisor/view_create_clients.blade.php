@@ -50,12 +50,12 @@
                             <div class="grid-x">
                                 <div class="medium-4 cell form-group">
                                     <label>Project Invested:
-                                        <input type="text" name="project" placeholder="Amara" class="form-control" required>
+                                        <input type="text" name="project" placeholder="Amara" class="form-control">
                                     </label>
                                 </div>
                                 <div class="medium-4  cell form-group">
                                     <label>Investments:
-                                        <input type="number" name="investment" placeholder="2M" class="form-control" required>
+                                        <input type="number" name="investment" placeholder="2M" class="form-control">
                                     </label>
                                 </div>
 
@@ -96,8 +96,14 @@
                                     <td>{{$all_client->name}}</td>
                                     <td>{{$all_client->email}}</td>
                                     <td>{{$all_client->phone}}</td>
-                                    <td>{{$all_client->investment}} &nbsp;million</td>
-                                    <td>{{$all_client->project}}</td>
+                                @if($all_client->project == null && $all_client->investment == null)
+                                        <td><span class="label warning">Pending...</span></td>
+                                        <td><span class="label warning">Pending...</span></td>
+                                    @else
+                                        <td>{{$all_client->investment}}&nbsp;million(s)</td>
+                                        <td>{{$all_client->project}}</td>
+                                        @endif
+
                                     <td><a href="/view_client_profile/{{$all_client->id}}">View Profile</a> </td>
                                 </tr>
 

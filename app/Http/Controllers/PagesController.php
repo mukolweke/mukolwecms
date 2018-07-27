@@ -94,4 +94,19 @@ class PagesController extends Controller
         return back();
     }
 
+    // update deal status when client makes a deal
+    public function makeInvestment(Request $request)
+    {
+        $deal = $this->clientWebRepository->updateDeal($request);
+
+        // call an event to send the email
+//        $this->mail->sendCreatedMyLead($request);
+
+        session()->put('success','updated');
+
+        return back();
+    }
+
+
+
 }

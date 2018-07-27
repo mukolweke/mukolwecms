@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClientsTable extends Migration
+class UpdateClientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -21,8 +21,8 @@ class CreateClientsTable extends Migration
             $table->string('password');
             $table->unsignedInteger('advisor_id');
             $table->integer('account_status')->default(0);
-            $table->string('project');
-            $table->string('investment');
+            $table->string('project',50)->nullable();
+            $table->string('investment',50)->nullable();
             $table->integer('activation_code');
             $table->integer('deal_status')->default(0);
             $table->date('deleted_at')->default(null);
@@ -30,6 +30,7 @@ class CreateClientsTable extends Migration
             $table->timestamps();
 
             $table->foreign('advisor_id')->references('id')->on('financial_advisors')->onDelete('cascade')->onUpdate('cascade');
+
 
         });
     }
@@ -41,6 +42,6 @@ class CreateClientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients');
+        //
     }
 }

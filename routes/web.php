@@ -43,7 +43,17 @@ Route::get('/view_client_profile/{id}', 'PagesController@viewProfile');
 Route::get('/view_leads_advisor', 'PagesController@viewAdvisorLeads');
 
 
+Route::post('/client_invest','PagesController@makeInvestment' );
+
+
 Route::post('/create_leads', 'PagesController@advisor_store');
+
+
+Route::get('/view_followups', 'FollowUpController@viewFollowUps');
+
+
+Route::post('/create_followup', 'FollowUpController@saveFollowUps');
+
 
 
 // mixed routes

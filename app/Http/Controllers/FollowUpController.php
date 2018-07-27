@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use App\FollowUp;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Http\Request;
@@ -52,6 +53,31 @@ class FollowUpController extends Controller
 
         \Session::flash('success', 'Follow-up schedule created');
         return Redirect::to('/view_schedule_index');
+
+    }
+
+
+    // advisor view followups page
+    public function viewFollowUps()
+    {
+        $data = ['all_followups'=> FollowUp::all(),
+
+        'all_clients' => Client::all()];
+
+        return view('advisor.track_followups', compact('data'));
+    }
+
+
+    // save details in database
+    public function saveFollowUps(Request $request)
+    {
+        $followup = $request->input('followup');
+        $client_id = $request->input('client_id');
+        $feedback = $request->input('feedback');
+
+        FollowUp::create($request->all());
+
+        return back();
 
     }
 

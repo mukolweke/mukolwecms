@@ -10,7 +10,7 @@ class Client extends Model
 {
     use Authenticatable;
 
-    protected $fillable = ['name', 'email', 'phone', 'password', 'advisor_id','project','investment','account_status', 'activation_code','deleted_at'];
+    protected $fillable = ['name', 'email', 'phone', 'password', 'advisor_id','project','investment','account_status','deal_status', 'activation_code','deleted_at'];
 
     protected $hidden = [
         'password', 'remember_token',

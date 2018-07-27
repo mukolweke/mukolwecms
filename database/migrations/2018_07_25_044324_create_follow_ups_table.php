@@ -16,10 +16,10 @@ class CreateFollowUpsTable extends Migration
         Schema::create('follow_ups', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->date('start_date');
-            $table->date('end_date');
             $table->unsignedInteger('advisor_id');
             $table->unsignedInteger('client_id');
+            $table->unsignedInteger('deal_status')->default(0);
+            $table->text('feedback');
             $table->timestamps();
 
             $table->foreign('advisor_id')->references('id')->on('financial_advisors')->onDelete('cascade')->onUpdate('cascade');
