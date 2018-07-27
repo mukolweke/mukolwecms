@@ -67,31 +67,30 @@
 
         mounted() {
             let app = this;
-            axios.get('/api/v1/advisors')
+            axios.get('/api/v1/advisor/')
                 .then(function (resp) {
                     app.advisors = resp.data;
                 })
                 .catch(function (resp) {
                     console.log(resp);
-                    alert("Could not load Advisors List");
                 });
         },
 
         methods: {
             deleteEntry(id, index) {
                 let app = this;
-                axios.delete('/api/v1/advisors/' + id)
+                axios.delete('/api/v1/advisor/' + id)
                     .then(function (resp) {
                         app.advisors.splice(index, 1);
                     })
                     .catch(function (resp) {
-                        alert("Could not delete FA");
+                        Console.log("Could not delete FA");
                     });
                 // }
             },
 
             confirmDelete(id, index) {
-                this.$confirm('Do you really want to delete an FA?', 'Warning', {
+                this.$confirm('Deleting an Advisor?', 'Warning', {
                     confirmButtonText: 'OK',
                     cancelButtonText: 'Cancel',
                     type: 'warning'

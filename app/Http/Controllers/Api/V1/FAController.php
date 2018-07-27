@@ -4,15 +4,28 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Events\FinancialAdvisorWasCreated;
 use App\FinancialAdvisor;
+use App\Http\Controllers\EmailController;
+use App\Repositories\Admin\FARepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Mail;
 
 class FAController extends Controller
 {
+
+    protected $fa_repo;
+    protected $mail;
+
+    public function __construct(FARepository $fa_repo, EmailController $mail)
+    {
+        $this->fa_repo = $fa_repo;
+        $this->mail = $mail;
+    }
+
     public function index()
     {
-        return FinancialAdvisor::all();
+        return $this->fa_repo->getAllAdvisors();
     }
 
     public function create()
@@ -22,26 +35,16 @@ class FAController extends Controller
 
     public function store(Request $request)
     {
-        dd('imefika');
 
-        $this->validate($request,[
-            'email' => 'unique:FinancialAdvisor|max:255',
+        $validator = $this->validate($request, [
+            'email' => 'unique:financial_advisors|max:255',
         ]);
 
-        $request_data = [
-          'name'=>request('name'),
-          'email'=>request('email'),
-          'phone'=>request('phone'),
-          'password'=>bcrypt(request('password')),
-          'fa_rank'=>request('rank'),
-        ];
+        $financial_advisor = $this->fa_repo->createAdvisor($request);
 
-        $financial_advisor = FinancialAdvisor::create($request_data);
 
-        // call an event to send the email
-        $event = new FinancialAdvisorWasCreated($financial_advisor);
+        $this->mail->send($request);
 
-        Event::fire($event);
 
         return $financial_advisor;
     }
@@ -49,7 +52,7 @@ class FAController extends Controller
 
     public function show($id)
     {
-        return FinancialAdvisor::findOrFail($id)->paginate(5);
+        return FinancialAdvisor::findOrFail($id);
     }
 
     public function edit($id)
@@ -60,16 +63,12 @@ class FAController extends Controller
 
     public function update(Request $request, $id)
     {
-        $financial_advisor = FinancialAdvisor::findOrFail($id)
-            ->update($request->all());
-
-        return $financial_advisor;
+        return $this->fa_repo->updateAdvisor($request, $id);
     }
 
     public function destroy($id)
     {
-        $financial_advisor = FinancialAdvisor::findOrFail($id)
-            ->delete();
+       $this->fa_repo->deleteAdvisor($id);
         return '';
     }
 }

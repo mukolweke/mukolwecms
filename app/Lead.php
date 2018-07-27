@@ -8,4 +8,9 @@ class Lead extends Model
 {
     protected $fillable = ['name', 'source', 'description','advisor_id'];
 
+    public function financialAdvisor()
+    {
+        return $this->belongsTo('App\FinancialAdvisor');
+    }
+
 }

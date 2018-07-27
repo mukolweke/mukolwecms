@@ -20,13 +20,12 @@ class CreateFinancialAdvisorsTable extends Migration
             $table->string('phone');
             $table->string('password');
             $table->integer('account_status')->default(0);
+            $table->integer('activation_code');
             $table->integer('fa_rank')->default(0);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
 
-
-            //relation to users table ...
 
         });
     }

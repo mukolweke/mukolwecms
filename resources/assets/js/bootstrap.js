@@ -7,7 +7,12 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
+
     window.$ = window.jQuery = require('jquery');
+
+    require('foundation-sites/dist/js/foundation'); // 'foundation.min' can also be used if you like
+
+
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

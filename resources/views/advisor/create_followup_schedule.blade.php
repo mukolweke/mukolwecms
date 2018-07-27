@@ -4,11 +4,6 @@
 
     @include('inc.navbar_advisor')
 
-    {{--<div data-alert class="alert">--}}
-        {{--This is an alert - alert that is rounded.--}}
-        {{--<a href="#" class="close">&times;</a>--}}
-    {{--</div>--}}
-
 
     <div id="admin" class="view_advisor">
 
@@ -116,10 +111,11 @@
 
 
                 <div class="card">
-                    <div class="card-section">
+                    <div class="card-section" >
 
-                        {{--{!! $calendar_details->calendar() !!}--}}
+                        {!! $calendar_details->calendar() !!}
                         {!! $calendar_details->script() !!}
+
 
                     </div>
                 </div>

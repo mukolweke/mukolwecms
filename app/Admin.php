@@ -2,11 +2,14 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\App;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User;
 
-class Admin extends Authenticatable
+class Admin extends Model
 {
+    use Authenticatable;
+
     protected $fillable = ['name', 'email', 'password'];
 
 
@@ -14,5 +17,9 @@ class Admin extends Authenticatable
     {
         return Admin::all();
     }
+
+//    protected $hidden = [
+//        'password', 'remember_token',
+//    ];
 
 }

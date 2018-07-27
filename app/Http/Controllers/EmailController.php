@@ -11,8 +11,12 @@ class EmailController extends Controller
     public function send(Request $request)
     {
 
+    $activation_code = $request->input('activation_code');
+    $email = $request->input('email');
 
-        Mail::send('mails.send', ['title' => "New FA", 'body' => "You Have been added as an FA"], function ($message)
+
+
+    Mail::send('mail.NewFA', ['title' => "Confirm Account", 'activation_code' => $activation_code ,'email'=>$email], function ($message)
         {
 
             $message->from('molukaka@cytonn.com', 'Michael Olukaka');
@@ -22,8 +26,6 @@ class EmailController extends Controller
         });
 
 
-        return view('admin.index', ['success' => 'Email Sent']);
-
-
+        return back();
     }
 }

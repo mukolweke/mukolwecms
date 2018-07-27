@@ -20,8 +20,12 @@ class CreateClientsTable extends Migration
             $table->string('phone');
             $table->string('password');
             $table->integer('account_status')->default(0);
+            $table->unsignedInteger('advisor_id');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('advisor_id')->references('id')->on('financial_advisors')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 

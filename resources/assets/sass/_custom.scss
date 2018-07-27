@@ -1,5 +1,5 @@
 body{
-  background-color: #fff;
+  background-color: #f5f5f5;
   color: #636b6f;
   font-family: 'Proxima Nova','Raleway', sans-serif;
   font-weight: 100;
@@ -121,6 +121,41 @@ body{
 
   .m-b-md {
     margin-bottom: 30px;
+  }
+
+  .admin_home_container{
+    margin-top: 50px;
+
+    .boost1{
+      color: #FFFFFF;
+      background-color: #f0ad4e;
+      border-color: #eea236;
+      font-weight:600;
+      a{
+        color: #FFFFFF;
+      }
+    }
+    .boost2{
+      background:#6f5499;
+      color:#cdbfe3;
+      font-weight:600;
+      a{
+        color: #FFFFFF;
+      }
+    }
+    .boost3{
+      color: #fff;
+      background-color: #5bc0de;
+      border-color: #46b8da;
+      font-weight:600;
+      a{
+        color: #FFFFFF;
+      }
+    }
+  }
+
+  .hide{
+    display: none;
   }
 
 }

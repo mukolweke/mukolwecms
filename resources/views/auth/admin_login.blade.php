@@ -8,11 +8,24 @@
         <hr>
     </div>
 
+
     <div class="row">
 
         <div class="form-container small-6 small-centered columns">
 
-            <form class="login-form" method="POST" action="{{route('home_admin')}}">
+            @if($validator != null)
+                <div class="alert callout warning radius" style="margin-top: 50px;" data-closable>
+
+                    <span>{{$validator}}</span>
+
+                    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+            @endif
+
+            <form class="login-form" method="POST" style="margin-top: 10px;" action="{{route('home_admin')}}">
 
                 {{ csrf_field() }}
 
@@ -21,11 +34,6 @@
 
                     <input id="email" type="email" name="email" value="{{ old('email') }}" aria-describedby="emailHelpText" required autofocus>
 
-                    @if ($errors->has('email'))
-                        <span class="help-text" id="emailHelpText">
-                            <strong>{{ $errors->first('email') }}</strong>
-                        </span>
-                    @endif
                 </div>
 
                 <div class="password">
@@ -33,11 +41,6 @@
 
                     <input id="password" type="password" name="password" aria-describedby="passwordHelpText" required>
 
-                    @if ($errors->has('password'))
-                        <span class="help-text" id="passwordHelpText">
-                            <strong>{{ $errors->first('password') }}</strong>
-                        </span>
-                    @endif
                 </div>
 
                 <div class="button-plus-link">

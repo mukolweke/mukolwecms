@@ -20,6 +20,9 @@ class CreateEmailsTable extends Migration
             $table->string('subject');
             $table->string('body');
             $table->timestamps();
+
+//            $table->foreign('advisor_id')->references('id')->on('financial_advisors')->onDelete('cascade')->onUpdate('cascade');
+//            $table->foreign('advisor_id')->references('id')->on('financial_advisors')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -18,8 +18,11 @@ class CreateLeadsTable extends Migration
             $table->string('name');
             $table->string('source');
             $table->text('description');
-            $table->integer('advisor_id')->default(1);
+            $table->unsignedInteger('advisor_id');
             $table->timestamps();
+
+            $table->foreign('advisor_id')->references('id')->on('financial_advisors')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 

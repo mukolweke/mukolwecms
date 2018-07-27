@@ -15,18 +15,9 @@ let mix = require('laravel-mix');
 //    .sass('resources/assets/sass/app.scss', 'public/css');
 
 
-mix.js([
-    // 'resources/assets/js/fullcalender.js',
-    //
-    // 'resources/assets/js/moment.min.js',
+mix.js('resources/assets/js/app.js'
 
-    './node_modules/jquery/dist/jquery.js',
-
-    'resources/assets/js/app.js',
-
-    './node_modules/foundation-sites/dist/js/foundation.min.js',
-
-], 'public/js/public.js');
+, 'public/js/public.js');
 
 
 mix.sass('resources/assets/sass/app.scss', 'public/css');

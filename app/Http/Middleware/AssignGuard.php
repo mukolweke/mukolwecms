@@ -16,7 +16,7 @@ class AssignGuard
      * @param string $redirectTo
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null, $redirectTo = 'home_admin')
+    public function handle($request, Closure $next, $guard = null, $redirectTo = '/')
     {
         if (!Auth::guard($guard)->check()) {
             return redirect($redirectTo);

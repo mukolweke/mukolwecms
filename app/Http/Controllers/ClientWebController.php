@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers;
 
 use App\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ClientController extends Controller
+class ClientWebController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,6 +17,7 @@ class ClientController extends Controller
     {
         return Client::all();
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -36,7 +37,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd('storing');
     }
 
     /**

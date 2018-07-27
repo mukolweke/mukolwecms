@@ -1,60 +1,14 @@
-
-<script>
-    export default {
-        mounted() {
-            let app = this;
-            let id = app.$route.params.id;
-            app.advisorId = id;
-            axios.get('/api/v1/advisors/' + id)
-                .then(function (resp) {
-                    app.advisor = resp.data;
-                })
-                .catch(function () {
-                    alert("Could not load FA List")
-                });
-        },
-        props: ['id'],
-        data: function () {
-            return {
-                advisorId: null,
-                advisor: {
-                    name: '',
-                    email: '',
-                    phone: '',
-                    password: '',
-                    rank: '',
-                }
-            }
-        },
-        methods: {
-            saveForm() {
-                event.preventDefault();
-                let app = this;
-                let newAdvisor = app.advisor;
-                axios.patch('/api/v1/advisors/' + app.advisorId, newAdvisor)
-                    .then(function (resp) {
-                        app.$router.replace('/');
-                    })
-                    .catch(function (resp) {
-                        console.log(resp);
-                        alert("Could not Update Avisors Details");
-                    });
-            }
-        }
-    }
-</script>
-
 <template>
     <div>
         <div class="form-group">
             <router-link to="/admin_dash" class="btn btn-default">Back</router-link>
         </div>
 
-        <div class="card" style="width: 500px;margin: 0 auto;padding-left:50px;">
-            <div class="card-divider">Create new company</div>
-            <div class="card-section">
+        <div class="card">
+            <div class="card-divider">Edit &nbsp;<strong>&nbsp;{{advisor.name}}</strong></div>
+            <div class="card-section create_fa">
                 <form v-on:submit="saveForm()">
-                    <div class="row">
+                    <div class="grid-x">
                         <div class="medium-7 cell form-group">
                             <label>Name:
                                 <input type="text" name="name" v-model="advisor.name" class="form-control" required>
@@ -71,22 +25,17 @@
                     <div class="row">
                         <div class="medium-7 cell form-group">
                             <label>Phone:
-                                <input type="number" name="phone" maxlength="10" minlength="10" v-model="advisor.phone" class="form-control" required>
+                                <input type="number" name="phone" maxlength="10" minlength="10" v-model="advisor.phone"
+                                       class="form-control" required>
                             </label>
                             <p class="help-text">0722000000</p>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="medium-7 cell form-group">
-                            <label>Default Password:
-                                <input type="password" name="password" v-model="advisor.password" value="Chancery1" class="form-control disabled" required>
-                            </label>
-                        </div>
-                    </div>
+
                     <div class="row">
                         <div class="medium-7 cell form-group">
                             <label>FA Rank:
-                                <select name="rank" class="form-control" v-model="advisor.rank">
+                                <select name="rank" class="form-control" v-model="advisor.fa_rank">
                                     <option value="">Choose Rank ...</option>
                                     <option value="0">Intern</option>
                                     <option value="1">Junior</option>
@@ -98,7 +47,7 @@
                     </div>
                     <div class="row">
                         <div class="medium-7 cell">
-                            <button class="button success">Create FA</button>
+                            <button class="button success">Update FA</button>
                         </div>
                     </div>
                 </form>
@@ -106,3 +55,57 @@
         </div>
     </div>
 </template>
+
+
+<script>
+    export default {
+        mounted() {
+
+            axios.get('/api/v1/advisor/' + this.$route.params.id)
+                .then(({data}) => {
+                    this.advisor = data;
+                }, () => {
+                    console.log("Error");
+                })
+        },
+
+        props: ['id'],
+
+        data: function () {
+            return {
+                advisorId: this.$route.params.id,
+                advisor: {
+                    name: '',
+                    email: '',
+                    phone: null,
+                    rank: null,
+                },
+            }
+        },
+
+        methods: {
+            saveForm() {
+                let app = this;
+                event.preventDefault();
+
+                axios.patch('/api/v1/advisor/' + app.advisorId, app.advisor)
+                    .then((response) => {
+                        let data = response.data;
+
+                      if (data.success){
+                          app.$router.push({path: '/view_fa'});
+                      }
+                    }, () => {
+                        console.log('Error')
+                    })
+            },
+            successCreate() {
+                this.$message({
+                    showClose: true,
+                    message: 'Financial Advisor Updated.',
+                    type: 'success'
+                });
+            },
+        },
+    }
+</script>

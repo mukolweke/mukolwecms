@@ -11,8 +11,8 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th width="200">Phone</th>
-                        <th>Date</th>
-                        <th width="200">&nbsp;</th>
+                        <th>Date Created</th>
+                        <th>Financial Advisor</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -21,16 +21,7 @@
                         <td>{{ client.email }}</td>
                         <td>{{ client.phone }}</td>
                         <td>{{ client.created_at }}</td>
-                        <td>
-                            <router-link :to="{name: 'editAdvisor', params: {id: client.id}}" class="button small primary ">
-                                Edit
-                            </router-link>
-                            <a href="#"
-                               class="button small alert"
-                               v-on:click="confirmDelete(client.id, index)">
-                                Delete
-                            </a>
-                        </td>
+                        <td>Mike</td>
                     </tr>
                     </tbody>
                 </table>
@@ -50,7 +41,8 @@
             return {
                 clients: [],
                 url:'/api/v1/clients',
-                pagination:[]
+                pagination:[],
+                noLeads:''
             }
         },
 
@@ -62,7 +54,7 @@
                 })
                 .catch(function (resp) {
                     console.log(resp);
-                    alert("Could not load Clients List");
+                    app.noLeads = true;
                 });
         },
 

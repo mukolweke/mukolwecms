@@ -40,7 +40,7 @@
             <div>
                 <a href="/admin/login" class="button primary login_button"><strong>LOGIN ADMIN</strong></a>
                 <a href="advisor/login" class="button primary login_button"><strong>LOGIN ADVISOR</strong></a>
-                <a href="client/login" class="button primary login_button"><strong>LOGIN CLIENT</strong></a>
+                <a href="{{route('client_login')}}" class="button primary login_button"><strong>LOGIN CLIENT</strong></a>
             </div>
         </div>
 
@@ -48,7 +48,7 @@
 
         <div class="grid-x medium-offset-2 grid-margin-x small-up-2 medium-up-3 large-up-6">
             <div class="cell my_cell" style="width: 320px;">
-                <img class="thumbnail" src="{{ asset('images/placeholder.jpeg')  }}">
+                <img class="thumbnail" src="/storage/placeholder.jpeg">
                 <h5>FA able to creates Clients</h5>
                 <p>One of the final steps in every web-project is deploying to live server. Often I see a problem
                     when server is provided by the client from their hosting they had purchased long time ago,
@@ -56,7 +56,7 @@
                     make some recommendations for clients, what hosting to prepare.</p>
             </div>
             <div class="cell my_cell" style="width: 320px;">
-                <img class="thumbnail" src="{{ asset('images/placeholder.jpeg')  }}">
+                <img class="thumbnail" src="/storage/placeholder.jpeg">
                 <h5>FA able to schedule Follow-ups</h5>
                 <p>Sending email is a typical function for most web-projects: notifications, password reminders,
                     invoices are done via email.
@@ -64,7 +64,7 @@
                     sending emails anymore, it’s about delivering them successfully</p>
             </div>
             <div class="cell my_cell" style="width: 320px;">
-                <img class="thumbnail" src="{{ asset('images/placeholder.jpeg')  }}">
+                <img class="thumbnail" src="/storage/placeholder.jpeg">
                 <h5>Client Management automation</h5>
                 <p>Laravel-Excel package is great for exporting data. But not a lot of info there about formatting Excel
                     cells – widths, word wraps, fonts etc. So when I encountered this in a client’s project,
