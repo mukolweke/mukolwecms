@@ -10,7 +10,7 @@ class Client extends Model
 {
     use Authenticatable;
 
-    protected $fillable = ['name', 'email', 'phone', 'password', 'account_status'];
+    protected $fillable = ['name', 'email', 'phone', 'password', 'advisor_id','project','investment','account_status', 'activation_code','deleted_at'];
 
     protected $hidden = [
         'password', 'remember_token',
@@ -21,6 +21,6 @@ class Client extends Model
 
     public function financialAdvisor()
     {
-        return $this->belongsTo('App\FinancialAdvisor');
+        return $this->belongsTo('App\FinancialAdvisor', 'advisor_id');
     }
 }

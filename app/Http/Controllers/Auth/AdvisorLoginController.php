@@ -2,25 +2,21 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Admin;
 use App\Client;
 use App\FinancialAdvisor;
 use App\Http\Controllers\Controller;
+use App\Repositories\Admin\FARepository;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AdvisorLoginController extends Controller
 {
-    /*
-     |--------------------------------------------------------------------------
-     | Login Controller
-     |--------------------------------------------------------------------------
-     |
-     | This controller handles authenticating users for the application and
-     | redirecting them to your home screen. The controller uses a trait
-     | to conveniently provide its functionality to your applications.
-     |
-     */
+
+    protected $repository;
+
+
     use AuthenticatesUsers;
     /**
      * Where to redirect users after login.
@@ -33,8 +29,10 @@ class AdvisorLoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(FARepository $repository)
     {
+        $this->repository = $repository;
+
         $this->middleware('guest:advisor,advisor/home')->except('logout');
     }
 
@@ -61,8 +59,13 @@ class AdvisorLoginController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
+        $user = FinancialAdvisor::where('email', $email)->first();
 
-        $account_details = FinancialAdvisor::where('email', $email)->first();
+        if ($user === null) {
+            return view('auth.advisor_login');
+        }
+
+        $account_details = $this->repository->getAdvisorDetails($email);
 
         if(($account_details->account_status) == 0)
         {
@@ -83,11 +86,13 @@ class AdvisorLoginController extends Controller
                 'password' => $password,
             ];
 
-            $passwd = (FinancialAdvisor::where('email', $email)->first()->password);
+            $passwd = $this->repository->getAdvisorDetails($email)->password;
 
             if(Hash::check($password, $passwd))
             {
                 $all_clients = Client::all();
+
+                $this->setSession($request,$email);
 
                 return view('advisor.home_advisor', compact('all_clients'));
 
@@ -107,7 +112,7 @@ class AdvisorLoginController extends Controller
         $email = $request->input('email');
 
 
-        $account_details = FinancialAdvisor::where('email', $email)->first();
+        $account_details = $this->repository->getAdvisorDetails($email);;
 
         if(($account_details->activation_code)==$activation_code){
             // redirect to home page
@@ -115,7 +120,11 @@ class AdvisorLoginController extends Controller
             $account = FinancialAdvisor::findOrFail($account_details->id)
                 ->update(['account_status' => 1]);
 
-            return view('advisor.home_advisor');
+            $this->setSession($request,$email);
+
+            $all_clients = Client::all();;
+
+            return view('advisor.home_advisor', compact('all_clients'));
         }else{
             // update account status and redirect back home page
 
@@ -127,6 +136,17 @@ class AdvisorLoginController extends Controller
             return view('auth.not_activated_view', compact('data'));
         }
 
+    }
+
+
+    public function setSession($request, $email){
+
+        $user_id = $this->repository->getAdvisorDetails($email)->id;
+        $name = $this->repository->getAdvisorDetails($email);
+
+        $request->session()->put('user_id',$user_id );
+        $request->session()->put('email', $email);
+        $request->session()->put('payload', $name);
     }
 
 }

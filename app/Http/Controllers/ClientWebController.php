@@ -3,11 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Repositories\Advisor\ClientWebRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ClientWebController extends Controller
 {
+    protected $client_web_repo;
+    protected $mail;
+
+    public function __construct(ClientWebRepository $client_web_repo, EmailController $mail)
+    {
+        $this->client_web_repo = $client_web_repo;
+        $this->mail = $mail;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +25,7 @@ class ClientWebController extends Controller
      */
     public function index()
     {
-        return Client::all();
+        return $this->client_web_repo->getAllClients();
     }
 
 
@@ -37,7 +47,18 @@ class ClientWebController extends Controller
      */
     public function store(Request $request)
     {
-        dd('storing');
+
+        $all_clients = $this->client_web_repo->getAllMyClients(session()->get('user_id'));
+
+        $client = $this->client_web_repo->createClient($request);
+
+
+        $this->mail->sendClientConfirmEmail($request);
+
+        session()->put('success', "Client Created Successfully");
+
+
+        return view('advisor.view_create_clients', compact('all_clients'));
     }
 
     /**

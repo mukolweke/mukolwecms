@@ -3,36 +3,6 @@
 @section('content')
     <div class="container">
 
-        {{--<div class="top-bar" id="example-menu">--}}
-        {{--<div class="top-bar-left">--}}
-        {{--<ul class="dropdown menu" data-dropdown-menu>--}}
-        {{--<li class="menu-text">Financial Advisor CMS</li>--}}
-        {{--</ul>--}}
-        {{--</div>--}}
-        {{--<div class="top-bar-right">--}}
-        {{--<ul class="menu">--}}
-        {{--@if (Auth::guest())--}}
-        {{--<li><a href="{{ route('login') }}">Login</a></li>--}}
-        {{--@else--}}
-        {{--<ul class="menu" data-dropdown-menu>--}}
-        {{--<li>--}}
-        {{--<a href="#">{{ Auth::user()->name }}</a>--}}
-        {{--</li>--}}
-        {{--<li>--}}
-        {{--<a href="{{ route('logout') }}"--}}
-        {{--onclick="event.preventDefault();document.getElementById('logout-form').submit();">--}}
-        {{--Logout--}}
-        {{--</a>--}}
-
-        {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-        {{--{{ csrf_field() }}--}}
-        {{--</form>--}}
-        {{--</li>--}}
-        {{--</ul>--}}
-        {{--@endif--}}
-        {{--</ul>--}}
-        {{--</div>--}}
-        {{--</div>--}}
         <div class="jumbotron text-center">
             <h1>Financial <strong>Advisor</strong></h1>
             <h4>Client Management System</h4>
@@ -45,7 +15,6 @@
         </div>
 
         <hr>
-
         <div class="grid-x medium-offset-2 grid-margin-x small-up-2 medium-up-3 large-up-6">
             <div class="cell my_cell" style="width: 320px;">
                 <img class="thumbnail" src="/storage/placeholder.jpeg">

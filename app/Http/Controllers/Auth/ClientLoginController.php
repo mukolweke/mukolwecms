@@ -59,6 +59,11 @@ class ClientLoginController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
+        $user = Client::where('email', $email)->first();
+
+        if ($user === null) {
+            return view('auth.client_login');
+        }
 
         $account_details = Client::where('email', $email)->first();
 

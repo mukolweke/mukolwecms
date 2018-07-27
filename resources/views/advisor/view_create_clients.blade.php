@@ -13,7 +13,23 @@
                     <div class="card-divider">Create New Client</div>
                     <div class="card-section">
 
-                        <form action="/api/v1/clients/" method="post">
+                        @if(Session::has('success'))
+                            <div class="callout success radius" data-closable>
+
+                                <span>{{ Session::get('success') }}</span>
+
+                                <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                            @if (Session::has('error'))
+                                <div class="alert alert-danger">
+                                    <p>{{ Session::get('error') }}</p>
+                                </div>
+                            @endif
+                        <form action="/create_client" method="post">
+                            {{csrf_field()}}
                             <div class="grid-x">
                                 <div class="medium-4 cell form-group">
                                     <label>Name:
@@ -39,16 +55,19 @@
                                 </div>
                                 <div class="medium-4  cell form-group">
                                     <label>Investments:
-                                        <input type="number" name="number" placeholder="2M" class="form-control" required>
+                                        <input type="number" name="investment" placeholder="2M" class="form-control" required>
                                     </label>
                                 </div>
+
+                                <input type="password" name="password"  value="Chancery1" class="hide">
+                                <input type="text"  name="activation_code" value="<?php echo (rand(1000, 9999)) ?>" class="hide">
+                                <input type="text"  name="advisor_id" value="<?php echo session()->get('user_id'); ?>" class="hide">
+
+
                                 <div class="medium-4 cell form-group">
                                     <button type="submit" class="success button expanded" style="margin-top: 25px;">Save Client</button>
                                 </div>
                             </div>
-
-                            <input type="password" name="password"  value="Chancery1" class="hide">
-                            <input type="text"  name="activation_code" class="hide">
 
                         </form>
                     </div>
@@ -56,39 +75,45 @@
 
 
                 <div class="table-scroll" >
-                    <h4 class="text-center">Mike Client List</h4>
-                    <table style="margin: 0 auto;">
-                        <thead style="background: black;color: white;">
-                        <tr>
-                            <th width="200">Name</th>
-                            <th width="150">Email</th>
-                            <th width="200">Phone</th>
-                            <th width="150">Investment</th>
-                            <th width="150">Project</th>
-                            <th width="150"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                    <h4 class="text-center">Full Cytonn Investments Clients</h4>
+                    @if($all_clients->count() > 0)
+                        <table style="margin: 0 auto;">
+                            <thead style="background: black;color: white;">
+                            <tr>
+                                <th width="200">Name</th>
+                                <th width="150">Email</th>
+                                <th width="200">Phone</th>
+                                <th width="150">Investment</th>
+                                <th width="150">Project</th>
+                                <th width="150"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-                        <tr>
-                            <td>Content Goes Here</td>
-                            <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-                            <td>Content Goes Here</td>
-                            <td>Content Goes Here</td>
-                            <td>Content Goes Here</td>
-                            <td>Content Goes Here</td>
-                        </tr>
-                        <tr>
-                            <td>Content Goes Here</td>
-                            <td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
-                            <td>Content Goes Here</td>
-                            <td>Content Goes Here</td>
-                            <td>Content Goes Here</td>
-                            <td>Content Goes Here</td>
-                        </tr>
+                            @foreach($all_clients as $all_client)
 
-                        </tbody>
-                    </table>
+                                <tr>
+                                    <td>{{$all_client->name}}</td>
+                                    <td>{{$all_client->email}}</td>
+                                    <td>{{$all_client->phone}}</td>
+                                    <td>{{$all_client->investment}} &nbsp;million</td>
+                                    <td>{{$all_client->project}}</td>
+                                    <td><a href="/view_client_profile/{{$all_client->id}}">View Profile</a> </td>
+                                </tr>
+
+                            @endforeach
+
+                            </tbody>
+                        </table>
+                    @else
+                        <div class="callout success radius text-center" style="width: 40%;margin: 0 auto;" data-closable>
+
+                            <h4>You have No Clients Added yet</h4>
+                            <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                 </div>
 
 

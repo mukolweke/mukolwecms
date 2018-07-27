@@ -59,34 +59,46 @@
     <br/>
     <div class="table-scroll" >
         <h4 class="text-center">Full Cytonn Investments Clients</h4>
-        <table style="margin: 0 auto;">
-            <thead style="background: black;color: white;">
-            <tr>
-                <th width="200">Name</th>
-                <th width="150">Email</th>
-                <th width="200">Phone</th>
-                <th width="150">Investment</th>
-                <th width="150">Project</th>
-                <th width="150"></th>
-            </tr>
-            </thead>
-            <tbody>
-
-            @foreach($all_clients as $all_client)
-
+        @if($all_clients->count() <0)
+            <table style="margin: 0 auto;">
+                <thead style="background: black;color: white;">
                 <tr>
-                    <td>{{$all_client->name}}</td>
-                    <td>{{$all_client->email}}</td>
-                    <td>{{$all_client->phone}}</td>
-                    <td>Content Goes Here</td>
-                    <td>Content Goes Here</td>
-                    <td><a href="#">View Profile</a> </td>
+                    <th width="200">Name</th>
+                    <th width="150">Email</th>
+                    <th width="200">Phone</th>
+                    <th width="150">Investment</th>
+                    <th width="150">Project</th>
+                    <th width="150">FA</th>
+                    <th width="150"></th>
                 </tr>
+                </thead>
+                <tbody>
+                @foreach($all_clients as $all_client)
 
-            @endforeach
+                    <tr>
+                        <td>{{$all_client->name}}</td>
+                        <td>{{$all_client->email}}</td>
+                        <td>{{$all_client->phone}}</td>
+                        <td>{{$all_client->investment}}&nbsp;million</td>
+                        <td>{{$all_client->project}}</td>
+                        <td>{{$all_client->advisor}}</td>
+                        <td><a href="#">View Profile</a> </td>
+                    </tr>
 
-            </tbody>
-        </table>
+                @endforeach
+
+                </tbody>
+            </table>
+            @else
+            <div class="callout success radius text-center" style="width: 40%;margin: 0 auto;" data-closable>
+
+                <h4>No Clients Added yet</h4>
+                <p><?php echo session()->get('payload');?></p>
+                <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
     </div>
 
 @endsection

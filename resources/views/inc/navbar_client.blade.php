@@ -2,7 +2,7 @@
 <div class="top-bar" id="mainNavigation">
     <div class="top-bar-left">
         <ul class="menu vertical medium-horizontal">
-            <li class="menu-text hide-for-small-only"><a href="/home_admin_dash">Client &centerdot; Dashboard</a> </li>
+            <li class="menu-text hide-for-small-only"><a href="/home_client_dash">Client &centerdot; Dashboard</a> </li>
             <li class="menu-text"><a href="/view_client_advisor">Profile</a></li>
         </ul>
     </div>

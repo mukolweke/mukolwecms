@@ -10,7 +10,7 @@
             <div class="card-section">
 
                 <div class="" v-if="noLeads === true">
-                    <p>niaje</p>
+                    <p>No Leads Assigned</p>
                 </div>
                 <div v-else>
                     <table class="table">
@@ -32,13 +32,11 @@
 
                             <td><a :href="lead.source">View</a></td>
 
-                            <td>mike</td>
+                            <td>{{lead.assigned}}</td>
 
-                            <td>description</td>
+                            <td>{{ lead.description}}</td>
                             <!--//{{ lead.description}}-->
                             <td>{{ lead.created_at }}</td>
-
-
 
                             <td>
                                 <router-link :to="{name: 'editLead', params: {id: lead.id}}" class="button small primary ">

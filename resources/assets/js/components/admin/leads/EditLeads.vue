@@ -34,12 +34,9 @@
                     <div class="grid-x">
                         <div class="medium-7 cell form-group">
                             <label>Assign Financial Advisor:
-                                <select name="rank" class="form-control" v-model="lead.advisor_id">
+                                <select name="rank" class="form-control"  v-model="lead.advisor_id">
                                     <option value="">Choose FA ...</option>
-                                    <option value="0">Mzee Wesley</option>
-                                    <option value="1">Mukolwe</option>
-                                    <option value="2">Charles</option>
-                                    <option value="3">Jane</option>
+                                    <option v-for="advisor, index in advisors" :value="advisor.id">{{ advisor.name }}</option>
                                 </select>
                             </label>
                         </div>
@@ -67,6 +64,16 @@
                 }, () => {
                     console.log("Error");
                 })
+
+            let vm=this;
+            axios.get('/api/v1/advisor/')
+                .then(function (resp) {
+                    console.log(resp)
+                    vm.advisors = resp.data;
+                })
+                .catch(function (resp) {
+                    console.log(resp);
+                });
         },
 
         props: ['id'],
@@ -81,6 +88,7 @@
                     advisor_id: '',
                     noLeads: false,
                 },
+                advisors:[]
             }
         },
 
