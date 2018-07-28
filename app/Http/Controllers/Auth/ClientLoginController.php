@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Client;
 use App\Http\Controllers\Controller;
+use App\Repositories\Client\ClientRepository;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ClientLoginController extends Controller
 {
+    protected $repository;
     /*
      |--------------------------------------------------------------------------
      | Login Controller
@@ -26,14 +29,17 @@ class ClientLoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/login';
+
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param ClientRepository $repository
      */
-    public function __construct()
+    public function __construct(ClientRepository $repository)
     {
-        $this->middleware('guest:admin,admin/home')->except('logout');
+        $this->repository = $repository;
+
+        $this->middleware('guest:advisor,advisor/home')->except('logout');
     }
 
 
@@ -59,51 +65,92 @@ class ClientLoginController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
-        $user = Client::where('email', $email)->first();
+        $user = $this->repository->getUser($email);
 
         if ($user === null) {
             return view('auth.client_login');
         }
 
-        $account_details = Client::where('email', $email)->first();
+        if (($user->account_status) == 0) {
+            // redirect to verification
+            $data = [
+                'account_details' => $user,
+                'err' => '',
+            ];
+            return view('auth.not_activated_client_view', compact('data'));
 
-        return view('clients.home_client');
+        } else {
+            $passwd = $this->repository->getUser($email)->password;
+
+            if (Hash::check($password, $passwd)) {
+                $request->session()->flush();
+
+                $this->setSession($request, $user);
+
+                $data = $this->getData($user);
+
+                return view('clients.home_client', compact('data'));
+
+            } else {
+
+                return view('auth.client_login');
+
+            }
+
+        }
+
+    }
+
+    public function verify(Request $request)
+    {
+        $activation_code = $request->input('activation_code');
+        $email = $request->input('email');
 
 
-//        if(($account_details->account_status) == 0)
-//        {
-//            // redirect to verification
-//            $data = [
-//                'account_details' => $account_details,
-//                'err'=> '',
-//            ];
-//            return view('auth.not_activated_view', compact('data'));
-//
-//        }else{
-//
-//            // Check if user is using email or username
-//            $field = filter_var($email, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-//
-//            $credentials = [
-//                $field => $email,
-//                'password' => $password,
-//            ];
-//
-//            $passwd = (FinancialAdvisor::where('email', $email)->first()->password);
-//
-//            if(Hash::check($password, $passwd))
-//            {
-//                $all_clients = Client::all();
-//
-//                return view('advisor.home_advisor', compact('all_clients'));
-//
-//            }else{
-//
-//                return view('auth.advisor_login');
-//
-//            }
-//
-//        }
+        $account_details = $this->repository->getUser($email);;
+
+        if (($account_details->activation_code) == $activation_code) {
+            // redirect to home page
+
+            $account = $this->repository->updateStatusAcc($account_details);
+
+            $request->session()->flush();
+
+            $this->setSession($request, $account_details);
+
+            $data = $this->getData($account_details);
+
+            return view('clients.home_client', compact('data'));
+        } else {
+            // update account status and redirect back home page
+            $data = [
+                'account_details' => $account_details,
+                'err' => 'Wrong Activation Code',
+            ];
+
+            return view('auth.not_activated_client_view', compact('data'));
+        }
+
+    }
+
+
+    public function setSession($request, $account_details)
+    {
+        $request->session()->put('user_id', $account_details->id);
+        $request->session()->put('email', $account_details->email);
+        $request->session()->put('payload', $account_details);
+    }
+
+
+    public function getData($account_details)
+    {
+        $data = [
+            'my_details' => $this->repository->getUser($account_details->email),
+
+            'my_fa' => $this->repository->getMyFa($account_details->id),
+        ];
+
+        return $data;
     }
 
 }

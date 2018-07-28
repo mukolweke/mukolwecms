@@ -43,10 +43,10 @@ Route::get('/view_client_profile/{id}', 'PagesController@viewProfile');
 Route::get('/view_leads_advisor', 'PagesController@viewAdvisorLeads');
 
 
-Route::post('/client_invest','PagesController@makeInvestment' );
+Route::post('/client_invest', 'PagesController@makeInvestment');
 
 
-Route::post('/client_invest_new','PagesController@makeNewInvestment' );
+Route::post('/client_invest_new', 'PagesController@makeNewInvestment');
 
 
 Route::post('/create_leads', 'PagesController@advisor_store');
@@ -56,7 +56,6 @@ Route::get('/view_followups', 'FollowUpController@viewFollowUps');
 
 
 Route::post('/create_followup', 'FollowUpController@saveFollowUps');
-
 
 
 // mixed routes
@@ -93,27 +92,26 @@ Route::post('home_advisor', 'Auth\AdvisorLoginController@login')->name('home_adv
 Route::post('/advisor_verify', 'Auth\AdvisorLoginController@verify')->name('advisor_verify');
 
 
+Route::post('/client_verify', 'Auth\ClientLoginController@verify')->name('client_verify');
 
-Route::group(['prefix' => 'admin','middleware' => 'assign.guard:admin,/home_admin'],function(){
 
-    Route::get('/home_admin',function ()
-    {
+Route::group(['prefix' => 'admin', 'middleware' => 'assign.guard:admin,/home_admin'], function () {
+
+    Route::get('/home_admin', function () {
         return view('admin.home_admin');
     });
 });
 
 
-Route::group(['prefix' => 'advisor','middleware' => 'assign.guard:advisor,advisor/login'],function(){
-    Route::get('home_advisor',function ()
-    {
+Route::group(['prefix' => 'advisor', 'middleware' => 'assign.guard:advisor,advisor/login'], function () {
+    Route::get('home_advisor', function () {
         return view('advisor.home_advisor');
     });
 });
 
 
-Route::group(['prefix' => 'client','middleware' => 'assign.guard:client,client/login'],function(){
-    Route::get('home_client',function ()
-    {
+Route::group(['prefix' => 'client', 'middleware' => 'assign.guard:client,client/login'], function () {
+    Route::get('home_client', function () {
         return view('home_client');
     });
 });

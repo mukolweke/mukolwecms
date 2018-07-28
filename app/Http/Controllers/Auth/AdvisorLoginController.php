@@ -63,36 +63,28 @@ class AdvisorLoginController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
-        $user = FinancialAdvisor::where('email', $email)->first();
+        $user = $this->repository->getAdvisorDetails($email);
 
         if ($user === null) {
             return view('auth.advisor_login');
         }
 
-        $account_details = $this->repository->getAdvisorDetails($email);
-
-        if (($account_details->account_status) == 0) {
+        if (($user->account_status) == 0) {
             // redirect to verification
             $data = [
-                'account_details' => $account_details,
+                'account_details' => $user,
                 'err' => '',
             ];
-            return view('auth.not_activated_view', compact('data'));
+            return view('auth.not_activated_advisor_view', compact('data'));
 
         } else {
-
-            // Check if user is using email or username
-            $field = filter_var($email, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-
-            $credentials = [
-                $field => $email,
-                'password' => $password,
-            ];
 
             $passwd = $this->repository->getAdvisorDetails($email)->password;
 
             if (Hash::check($password, $passwd)) {
-                $this->setSession($request, $email);
+                $request->session()->flush();
+
+                $this->setSession($request, $user);
 
                 $data = $this->getData();
 
@@ -119,10 +111,9 @@ class AdvisorLoginController extends Controller
         if (($account_details->activation_code) == $activation_code) {
             // redirect to home page
 
-            $account = FinancialAdvisor::findOrFail($account_details->id)
-                ->update(['account_status' => 1]);
+            $account = $this->repository->updateStatusAcc($account_details);
 
-            $this->setSession($request, $email);
+            $this->setSession($request, $account_details);
 
             $data = $this->getData();
 
@@ -134,21 +125,17 @@ class AdvisorLoginController extends Controller
                 'err' => 'Wrong Activation Code',
             ];
 
-            return view('auth.not_activated_view', compact('data'));
+            return view('auth.not_activated_advisor_view', compact('data'));
         }
 
     }
 
 
-    public function setSession($request, $email)
+    public function setSession($request, $account_details)
     {
-
-        $user_id = $this->repository->getAdvisorDetails($email)->id;
-        $name = $this->repository->getAdvisorDetails($email);
-
-        $request->session()->put('user_id', $user_id);
-        $request->session()->put('email', $email);
-        $request->session()->put('payload', $name);
+        $request->session()->put('user_id', $account_details->id);
+        $request->session()->put('email', $account_details->email);
+        $request->session()->put('payload', $account_details);
     }
 
 

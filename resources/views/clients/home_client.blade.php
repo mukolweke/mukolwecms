@@ -13,18 +13,6 @@
             <div class="grid-x">
                 <div class="medium-6 columns">
                     <div class="callout boost2">
-                        <h5>Financial Advisor</h5>
-                        <div class="grid-x">
-                            <div class="medium-6 cell">
-                                <p> # 5</p>
-                                <p>Email: test@user.com</p>
-                                <p>Phone: +254719692332</p>
-                            </div>
-                            <div class="medium-4 cell" style="margin-left: 70px;">
-                                <img src="/storage/img1.jpg" class="css-class thumbnail" alt="alt text">
-                            </div>
-                        </div>
-                        <hr/>
                         <h5>Supervisor</h5>
                         <div class="grid-x">
                             <div class="medium-6 cell">
@@ -34,6 +22,18 @@
                             </div>
                             <div class="medium-4 cell" style="margin-left: 70px;">
                                 <img src="/storage/img4.jpg" class="css-class thumbnail" alt="alt text">
+                            </div>
+                        </div>
+                        <hr/>
+                        <h5>Financial Advisor</h5>
+                        <div class="grid-x">
+                            <div class="medium-6 cell">
+                                <p> # 5</p>
+                                <p>Email: test@user.com</p>
+                                <p>Phone: +254719692332</p>
+                            </div>
+                            <div class="medium-4 cell" style="margin-left: 70px;">
+                                <img src="/storage/img1.jpg" class="css-class thumbnail" alt="alt text">
                             </div>
                         </div>
                         <hr/>

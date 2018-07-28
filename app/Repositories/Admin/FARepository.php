@@ -14,7 +14,9 @@ use App\Lead;
 
 class FARepository
 {
-    public function __construct(){}
+    public function __construct()
+    {
+    }
 
     // get all
     public function getAllAdvisors()
@@ -61,6 +63,13 @@ class FARepository
     public function getMyLeads($id)
     {
         return Lead::where('advisor_id', $id)->get();
+    }
+
+    // update STATUS ACC
+    public function updateStatusAcc($account_details)
+    {
+        return FinancialAdvisor::findOrFail($account_details->id)
+            ->update(['account_status' => 1]);
     }
 
 }

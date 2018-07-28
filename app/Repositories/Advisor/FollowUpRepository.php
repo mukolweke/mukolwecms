@@ -15,7 +15,13 @@ use Illuminate\Http\Request;
 
 class FollowUpRepository
 {
-    // get all
+    // get all followups
+    public function getAllFollowUps()
+    {
+        return FollowUp::orderBy('created_at', 'desc')->get();
+    }
+
+    // get all notifications
     public function getAllNotifications()
     {
         return Notification::all();
