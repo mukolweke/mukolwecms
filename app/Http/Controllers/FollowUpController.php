@@ -69,7 +69,7 @@ class FollowUpController extends Controller
     {
         $data = [
 
-            'all_followups' => $this->follow_repo->getAllNotifications(),
+            'all_followups' => $this->follow_repo->getAllFollowUps(),
 
             'all__potential_clients' => $this->follow_repo->getPotentialClients(),
         ];
