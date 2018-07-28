@@ -29,4 +29,10 @@ class Client extends Model
         return $this->hasMany('App\Investment');
 
     }
+
+    public function notification()
+    {
+        return $this->hasMany('App\Notification');
+    }
+
 }

@@ -24,7 +24,8 @@
 
                                         <span>{{ Session::get('success') }}</span>
 
-                                        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                                        <button class="close-button" aria-label="Dismiss alert" type="button"
+                                                data-close>
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
@@ -34,24 +35,26 @@
 
                                         <span>{{ Session::get('warning') }}</span>
 
-                                        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                                        <button class="close-button" aria-label="Dismiss alert" type="button"
+                                                data-close>
                                             <span aria-hidden="true">&times;</span>
                                         </button>
 
                                     </div>
                                 @endif
                             </div>
-
                             <div class="medium-4 columns">
                                 <div class="form-group">
-                                    {!! Form:: label('name','Schedule Name: ') !!}
+
+                                    {!! Form:: label('follow_up_name','Followup Name: ') !!}
                                     <div>
-                                        {!! Form::text('name', null,['class'=>'form-control']) !!}
+                                        {!! Form::select('follow_up_name', [''=>'Choose ...','call' => 'Call', 'email' => 'Email', 'text'=>'Text Messaging', 'meeting'=>'Physical Meeting']) !!}
 
                                         @if ($errors->has('name'))
                                             <div class="alert callout" data-closable>
-                                                <span>{{$errors->first('name')}}</span>
-                                                <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                                                <span>{{$errors->first('follow_up_name')}}</span>
+                                                <button class="close-button" aria-label="Dismiss alert" type="button"
+                                                        data-close>
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
@@ -70,7 +73,8 @@
                                         @if ($errors->has('start_date'))
                                             <div class="alert callout" data-closable>
                                                 <span>{{$errors->first('start_date')}}</span>
-                                                <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                                                <button class="close-button" aria-label="Dismiss alert" type="button"
+                                                        data-close>
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
@@ -89,7 +93,8 @@
                                         @if ($errors->has('end_date'))
                                             <div class="alert callout" data-closable>
                                                 <span>{{$errors->first('end_date')}}</span>
-                                                <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                                                <button class="close-button" aria-label="Dismiss alert" type="button"
+                                                        data-close>
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
@@ -98,10 +103,42 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="grid-x">
+                            <div class="medium-4 columns">
+                                <div class="form-group">
 
-                            <div class="medium-2 small-2 large-2 columns text-center">
-                                {!! Form::submit('Add Schedule', ['class'=>'button success', 'style'=>'color:white;font-weight:600;']) !!}
+                                    {!! Form:: label('client_id','Client Name: ') !!}
+                                    <div>
+                                        <select name="client_id">
+                                            <option value="">Choose ...</option>
+                                            @foreach($data['potential_clients'] as $all_client)
+                                                <option :value="{{$all_client->id}}">{{$all_client->name}}</option>
+                                            @endforeach
+
+                                        </select>
+                                        @if ($errors->has('name'))
+                                            <div class="alert callout" data-closable>
+                                                <span>{{$errors->first('client_id')}}</span>
+                                                <button class="close-button" aria-label="Dismiss alert" type="button"
+                                                        data-close>
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        @endif
+
+                                    </div>
+                                </div>
                             </div>
+                            <div class="medium-4 columns">
+                                <div class="form-group">
+
+                                    {!! Form::submit('Add Schedule', ['class'=>'button expanded success', 'style'=>'color:white;margin-top:25px;font-weight:600;']) !!}
+
+                                </div>
+                            </div>
+                            <input type="text" name="advisor_id" value="<?php echo session()->get('user_id')?>"
+                                   class="hide">
 
                         </div>
                         {!! Form::close() !!}
@@ -111,10 +148,10 @@
 
 
                 <div class="card">
-                    <div class="card-section" >
+                    <div class="card-section">
 
-                        {!! $calendar_details->calendar() !!}
-                        {!! $calendar_details->script() !!}
+                        {!! $data['calendar_details']->calendar() !!}
+                        {!! $data['calendar_details']->script() !!}
 
 
                     </div>

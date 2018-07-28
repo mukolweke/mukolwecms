@@ -85,8 +85,11 @@ class ClientWebRepository
             'investment' => request('investment'),
             ];
 
-        $client_to_update = Client::findOrFail($request['client_id'])
-            ->update(['deal_status'=>1,'project'=>$request['project'],'investment'=>$request['investment']]);
+        Client::findOrFail($request['client_id'])
+            ->update(['deal_status'=>1]);
+
+        // create investment
+        Investment::create($request);
 
         return response()->json(['success' => true]);
     }

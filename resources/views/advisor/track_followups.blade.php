@@ -45,8 +45,8 @@
                                     <label>Select Client Name:
                                         <select name="client_id">
                                             <option value="">Choose ...</option>
-                                            @foreach($data['all_clients'] as $all_client)
-                                                <option value="{{$all_client->id}}">{{$all_client->name}}</option>
+                                            @foreach($data['all__potential_clients'] as $all_client)
+                                                <option :value="{{$all_client->id}}">{{$all_client->name}}</option>
                                             @endforeach
 
                                         </select>
@@ -77,19 +77,21 @@
                         <table style="margin: 0 auto;">
                             <thead style="background: black;color: white;">
                             <tr>
-                                <th width="200">Name</th>
-                                <th width="200">Source</th>
-                                <th width="150">Description</th>
+                                <th width="200">Name FollowUp</th>
+                                <th width="200">Client Name</th>
+                                <th width="150">Feedback</th>
+                                <th width="150">Date</th>
                             </tr>
                             </thead>
                             <tbody>
 
                             @foreach($data['all_followups'] as $all_followup)
-
                                 <tr>
+                                    {{--{{dd(\App\Client::find($all_followup->id)->name)}}--}}
                                     <td>{{$all_followup->name}}</td>
-                                    <td><a href="{{$all_followup->source}}">Go There</a> </td>
-                                    <td>{{$all_followup->description}}</td>
+                                    <td>{{$all_followup->id}}</td>
+                                    <td>{{$all_followup->feedback}}</td>
+                                    <td>{{$all_followup->created_at}}</td>
                                 </tr>
 
                             @endforeach

@@ -33,7 +33,7 @@
 
                     <hr/>
 
-                    @if($client_detail->deal_status != 0)
+                    @if($client_detail->deal_status == 0)
                             <p><strong>Investment:</strong>&nbsp;<span class="label warning">Pending investor</span></p>
                         <form action="/client_invest" method="post">
                             {{csrf_field()}}

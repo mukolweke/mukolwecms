@@ -34,4 +34,9 @@ class FinancialAdvisor extends Model
         return $this->hasMany('App\FollowUp');
 
     }
+
+    public function notification()
+    {
+        return $this->hasMany('App\Notification');
+    }
 }

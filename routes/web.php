@@ -45,6 +45,7 @@ Route::get('/view_leads_advisor', 'PagesController@viewAdvisorLeads');
 
 Route::post('/client_invest','PagesController@makeInvestment' );
 
+
 Route::post('/client_invest_new','PagesController@makeNewInvestment' );
 
 
