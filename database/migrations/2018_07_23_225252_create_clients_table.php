@@ -19,8 +19,11 @@ class CreateClientsTable extends Migration
             $table->string('email',100)->unique();
             $table->string('phone');
             $table->string('password');
-            $table->integer('account_status')->default(0);
             $table->unsignedInteger('advisor_id');
+            $table->integer('account_status')->default(0);
+            $table->integer('activation_code');
+            $table->integer('deal_status')->default(0);
+            $table->date('deleted_at')->default(null);
             $table->rememberToken();
             $table->timestamps();
 

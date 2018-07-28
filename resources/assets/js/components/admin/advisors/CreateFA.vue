@@ -101,7 +101,7 @@
                 app.phone = app.advisor.phone;
 
                 if ((((app.phone).toString()).length)!==10) {
-                    this.errors.push('Enter Correct Phone Number #');
+                    this.errors.push('Enter Correct Phone Number #count');
                 }else{
                     let newAdvisor = app.advisor;
 

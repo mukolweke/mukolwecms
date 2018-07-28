@@ -2,22 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Client;
-use App\Repositories\Advisor\ClientWebRepository;
+use App\Notification;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class ClientWebController extends Controller
+class NotificationController extends Controller
 {
-    protected $client_web_repo;
-    protected $mail;
-
-    public function __construct(ClientWebRepository $client_web_repo, EmailController $mail)
-    {
-        $this->client_web_repo = $client_web_repo;
-        $this->mail = $mail;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -25,9 +14,8 @@ class ClientWebController extends Controller
      */
     public function index()
     {
-        return $this->client_web_repo->getAllClients();
+        //
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -47,26 +35,16 @@ class ClientWebController extends Controller
      */
     public function store(Request $request)
     {
-
-        $all_clients = $this->client_web_repo->getAllMyClients(session()->get('user_id'));
-
-        $this->client_web_repo->createClient($request);
-
-        $this->mail->sendClientConfirmEmail($request);
-
-        session()->put('success', "Client Created Successfully");
-
-
-        return view('advisor.view_create_clients', compact('all_clients'));
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Notification $notification)
     {
         //
     }
@@ -74,10 +52,10 @@ class ClientWebController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Notification $notification)
     {
         //
     }
@@ -86,10 +64,10 @@ class ClientWebController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Notification $notification)
     {
         //
     }
@@ -97,10 +75,10 @@ class ClientWebController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Notification $notification)
     {
         //
     }

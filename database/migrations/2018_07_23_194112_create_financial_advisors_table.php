@@ -21,6 +21,7 @@ class CreateFinancialAdvisorsTable extends Migration
             $table->string('password');
             $table->integer('account_status')->default(0);
             $table->integer('activation_code');
+            $table->date('delete_at')->default(null);
             $table->integer('fa_rank')->default(0);
             $table->rememberToken();
             $table->timestamps();

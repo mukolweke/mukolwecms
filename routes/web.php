@@ -28,10 +28,35 @@ Route::get('/home_advisor', 'HomeController@index_advisor')->name('home_advisor'
 Route::get('/view_client_advisor', 'PagesController@advisorViewClient');
 
 
+Route::post('/create_client', 'ClientWebController@store');
+
+
 Route::get('/view_schedule_index', 'FollowUpController@index')->name('view_schedule_index');
 
 
 Route::post('/addSchedule', 'FollowUpController@addSchedule')->name('addSchedule');
+
+
+Route::get('/view_client_profile/{id}', 'PagesController@viewProfile');
+
+
+Route::get('/view_leads_advisor', 'PagesController@viewAdvisorLeads');
+
+
+Route::post('/client_invest','PagesController@makeInvestment' );
+
+
+Route::post('/client_invest_new','PagesController@makeNewInvestment' );
+
+
+Route::post('/create_leads', 'PagesController@advisor_store');
+
+
+Route::get('/view_followups', 'FollowUpController@viewFollowUps');
+
+
+Route::post('/create_followup', 'FollowUpController@saveFollowUps');
+
 
 
 // mixed routes
@@ -101,7 +126,7 @@ Route::get('client/login', 'Auth\ClientLoginController@showLoginForm')->name('cl
 
 Route::post('client/login', 'Auth\ClientLoginController@login')->name('client_form');
 
-Route::get('/home_admin_dash', 'PagesController@clientDash');
+Route::get('/home_client_dash', 'PagesController@clientDash');
 
 
 

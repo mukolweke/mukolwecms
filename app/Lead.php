@@ -10,7 +10,7 @@ class Lead extends Model
 
     public function financialAdvisor()
     {
-        return $this->belongsTo('App\FinancialAdvisor');
+        return $this->belongsTo('App\FinancialAdvisor','advisor_id');
     }
 
 }

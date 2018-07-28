@@ -1,10 +1,10 @@
- <?php
+<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFollowUpsTable extends Migration
+class CreateInvestmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,19 @@ class CreateFollowUpsTable extends Migration
      */
     public function up()
     {
-        Schema::create('follow_ups', function (Blueprint $table) {
+        Schema::create('investments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->unsignedInteger('advisor_id');
             $table->unsignedInteger('client_id');
-            $table->unsignedInteger('deal_status')->default(0);
-            $table->text('feedback');
+            $table->string('project')->nullable();
+            $table->integer('investment')->nullable();
             $table->timestamps();
 
-            $table->foreign('advisor_id')->references('id')->on('financial_advisors')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade')->onUpdate('cascade');
 
         });
+
     }
+
     /**
      * Reverse the migrations.
      *
@@ -34,6 +33,6 @@ class CreateFollowUpsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('follow_ups');
+        Schema::dropIfExists('investments');
     }
 }

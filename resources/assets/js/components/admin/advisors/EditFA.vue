@@ -9,6 +9,15 @@
             <div class="card-section create_fa">
                 <form v-on:submit="saveForm()">
                     <div class="grid-x">
+                        <div class="medium-7 cell">
+                            <el-alert v-if="errors.length" type="error">
+                                <ul class="err">
+                                    <li v-for="error in errors">{{ error }}</li>
+                                </ul>
+                            </el-alert>
+                        </div>
+                    </div>
+                    <div class="grid-x">
                         <div class="medium-7 cell form-group">
                             <label>Name:
                                 <input type="text" name="name" v-model="advisor.name" class="form-control" required>
@@ -69,7 +78,7 @@
                 })
         },
 
-        props: ['id'],
+        props: ['id','title'],
 
         data: function () {
             return {
@@ -80,6 +89,8 @@
                     phone: null,
                     rank: null,
                 },
+                errors:[],
+                message:'',
             }
         },
 
@@ -88,16 +99,23 @@
                 let app = this;
                 event.preventDefault();
 
-                axios.patch('/api/v1/advisor/' + app.advisorId, app.advisor)
-                    .then((response) => {
-                        let data = response.data;
+                app.errors = [];
+                app.phone = app.advisor.phone;
 
-                      if (data.success){
-                          app.$router.push({path: '/view_fa'});
-                      }
-                    }, () => {
-                        console.log('Error')
-                    })
+                if ((((app.phone).toString()).length)!==10) {
+                    this.errors.push('Enter Correct Phone Number #count');
+                }else {
+                    axios.patch('/api/v1/advisor/' + app.advisorId, app.advisor)
+                        .then((response) => {
+                            let data = response.data;
+
+                            if (data.success) {
+                                app.$router.push({path: '/view_fa'});
+                            }
+                        }, () => {
+                            console.log('Error')
+                        })
+                }
             },
             successCreate() {
                 this.$message({

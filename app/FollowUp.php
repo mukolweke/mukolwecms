@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class FollowUp extends Model
 {
     protected $fillable = [
-        'name', 'start_date', 'end_date',
+        'name', 'advisor_id','client_id', 'deal_status', 'feedback'
     ];
 
     public function financialAdvisor()

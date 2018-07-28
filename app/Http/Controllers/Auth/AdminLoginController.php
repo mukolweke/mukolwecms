@@ -67,6 +67,12 @@ class AdminLoginController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
+        $user = Admin::where('email', $email)->first();
+
+        if ($user === null) {
+            return view('auth.admin_login');
+        }
+
         // Check if user is using email or username
         $field = filter_var($email, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 

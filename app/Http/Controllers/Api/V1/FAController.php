@@ -43,7 +43,7 @@ class FAController extends Controller
         $financial_advisor = $this->fa_repo->createAdvisor($request);
 
 
-        $this->mail->send($request);
+        $this->mail->sendConfirmEmail($request);
 
 
         return $financial_advisor;

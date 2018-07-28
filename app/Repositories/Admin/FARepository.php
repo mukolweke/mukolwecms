@@ -10,6 +10,7 @@ namespace App\Repositories\Admin;
 
 
 use App\FinancialAdvisor;
+use App\Lead;
 
 class FARepository
 {
@@ -49,6 +50,17 @@ class FARepository
     {
         $financial_advisor = FinancialAdvisor::findOrFail($id)
             ->delete();
+    }
+
+    public function getAdvisorDetails($email)
+    {
+        return FinancialAdvisor::where('email', $email)->first();
+    }
+
+    // get advisors leads
+    public function getMyLeads($id)
+    {
+        return Lead::where('advisor_id', $id)->get();
     }
 
 }
