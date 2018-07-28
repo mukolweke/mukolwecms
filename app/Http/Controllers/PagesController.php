@@ -46,9 +46,13 @@ class PagesController extends Controller
     // advisor index page
     public function advisorDash()
     {
-        $all_clients = $this->clientWebRepository->getAllClients();
+        $data =[
+            'all_clients' => $this->clientWebRepository->getAllClients(),
 
-        return view('advisor.home_advisor', compact('all_clients'));
+            'my_clients' => $this->clientWebRepository->getAllMyClients(session()->get('user_id')),
+        ];
+
+        return view('advisor.home_advisor', compact('data'));
     }
 
     // advisor view their clients page
@@ -97,10 +101,24 @@ class PagesController extends Controller
     // update deal status when client makes a deal
     public function makeInvestment(Request $request)
     {
-        $deal = $this->clientWebRepository->updateDeal($request);
+        $this->clientWebRepository->updateDeal($request);
 
         // call an event to send the email
-//        $this->mail->sendCreatedMyLead($request);
+        $this->mail->sendMadeDeal($request);
+
+        session()->put('success','updated');
+
+        return back();
+    }
+
+
+    // adding another investment
+    public function makeNewInvestment(Request $request)
+    {
+        $this->clientWebRepository->newInvestmentDeal($request);
+
+        // call an event to send the email
+        $this->mail->sendNewDeal($request);
 
         session()->put('success','updated');
 

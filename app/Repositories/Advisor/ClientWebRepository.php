@@ -10,6 +10,7 @@ namespace App\Repositories\Advisor;
 
 
 use App\Client;
+use App\Investment;
 
 class ClientWebRepository
 {
@@ -44,20 +45,30 @@ class ClientWebRepository
         if(request('project') != null && request('investment') != null){
             $this->deal_status = 1;
         }
-        $request_data = [
+        $client_data = [
             'name' => request('name'),
             'email' => request('email'),
             'phone' => request('phone'),
             'password' => bcrypt(request('password')),
             'advisor_id'=> request('advisor_id'),
-            'project' => request('project'),
             'deal_status' => $this->deal_status,
-            'investment' => request('investment'),
             'activation_code' => request('activation_code'),
             'deleted_at'=> date("Y-m-d",strtotime(time()))
         ];
 
-        return Client::create($request_data);
+        Client::create($client_data);
+
+        $invest_data = [
+            'client_id'=> Client::latest()->first()->id,
+            'project' => request('project'),
+            'investment' => request('investment'),
+
+        ];
+
+
+        Investment::create($invest_data);
+
+        return true;
     }
 
     public function getClientDetails($id)
@@ -78,6 +89,12 @@ class ClientWebRepository
             ->update(['deal_status'=>1,'project'=>$request['project'],'investment'=>$request['investment']]);
 
         return response()->json(['success' => true]);
+    }
+
+    // investor makes new deal
+    public function newInvestmentDeal($request)
+    {
+        return Investment::create($request->all());
     }
 
 }

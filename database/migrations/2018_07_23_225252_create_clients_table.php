@@ -21,8 +21,6 @@ class CreateClientsTable extends Migration
             $table->string('password');
             $table->unsignedInteger('advisor_id');
             $table->integer('account_status')->default(0);
-            $table->string('project');
-            $table->string('investment');
             $table->integer('activation_code');
             $table->integer('deal_status')->default(0);
             $table->date('deleted_at')->default(null);

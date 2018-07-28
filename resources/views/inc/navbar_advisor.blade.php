@@ -11,6 +11,7 @@
     </div>
     <div class="top-bar-right">
         <ul class="menu vertical medium-horizontal">
+            <li class="menu-text"><a href="#"><?php echo session()->get('payload')->name;?></a></li>
             <li class="menu-text">
                 <a class="dropdown-item" href="{{ route('logout') }}"
                    onclick="event.preventDefault();

@@ -50,8 +50,7 @@ class ClientWebController extends Controller
 
         $all_clients = $this->client_web_repo->getAllMyClients(session()->get('user_id'));
 
-        $client = $this->client_web_repo->createClient($request);
-
+        $this->client_web_repo->createClient($request);
 
         $this->mail->sendClientConfirmEmail($request);
 

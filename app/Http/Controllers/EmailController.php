@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use App\FinancialAdvisor;
 use App\Lead;
 use Illuminate\Http\Request;
@@ -88,6 +89,46 @@ class EmailController extends Controller
 
 
         Mail::send('mail.NewClient', ['title' => "Confirm Account", 'activation_code' => $activation_code ,'email'=>$email], function ($message)
+        {
+
+            $message->from('molukaka@cytonn.com', 'Michael Olukaka');
+
+            $message->to('mukolwecms-326739@inbox.mailtrap.io');
+
+        });
+
+
+        return back();
+    }
+
+    // email sent when client makes a deal i
+    public function sendMadeDeal(Request $request)
+    {
+
+        $client_details = Client::find($request->input('client_id'));
+
+
+        Mail::send('mail.DealMade', ['title' => "Confirm Account", 'client_details'=> $client_details], function ($message)
+        {
+
+            $message->from('molukaka@cytonn.com', 'Michael Olukaka');
+
+            $message->to('mukolwecms-326739@inbox.mailtrap.io');
+
+        });
+
+
+        return back();
+    }
+
+    // email sent when client makes a deal i
+    public function sendNewDeal(Request $request)
+    {
+
+        $client_details = Client::find($request->input('client_id'));
+
+
+        Mail::send('mail.NewDealMade', ['title' => "Confirm Account", 'client_details'=> $client_details], function ($message)
         {
 
             $message->from('molukaka@cytonn.com', 'Michael Olukaka');
