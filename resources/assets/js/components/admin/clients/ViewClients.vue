@@ -21,11 +21,10 @@
                         <td>{{ client.email }}</td>
                         <td>{{ client.phone }}</td>
                         <td>{{ client.created_at }}</td>
-                        <td>Mike</td>
+                        <td>{{ client.advisor }}</td>
                     </tr>
                     </tbody>
                 </table>
-
 
             </div>
         </div>
